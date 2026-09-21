@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TelaControleLogin">
+   <children>
+      
+      <AnchorPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: rgba(10, 25, 45, 0.75);">
+         <children>
+            <ImageView fx:id="imgFundoLogin" fitHeight="1080.0" fitWidth="1310.0" layoutX="610.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/imagemFundoTelaLogin.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgSecaoProdutos" fitHeight="330.0" fitWidth="260.0" layoutX="680.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/secaoProdutos.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgSecaoEstoque" fitHeight="330.0" fitWidth="260.0" layoutX="985.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/secaoEstoque.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgSecaoFornecedores" fitHeight="330.0" fitWidth="260.0" layoutX="1290.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/secaoFornecedores.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgSecaoClientes" fitHeight="330.0" fitWidth="260.0" layoutX="1595.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/secaoClientes.png" />
+               </image>
+            </ImageView>
+            <VBox layoutX="680.0" layoutY="203.0" spacing="8.0">
+               <children>
+                  <Label fx:id="lblBemVindo" text="Bem-vindo ao" textFill="WHITE">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblSistema" text="Sistema de Gestão de Mercadinho" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="52.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTudoQVcPrecisa" text="Tudo o que você precisa para administrar seu negócio, em um só lugar." textFill="#cbd5e1">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="3.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+         </children></AnchorPane>
+      <AnchorPane prefHeight="1080.0" prefWidth="610.0" style="-fx-background-color: #021F44;">
+         <children>
+            <ImageView fx:id="imgLogoMercadoMaisFacil" fitHeight="220.0" fitWidth="421.0" layoutX="106.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/LogoMercadoMaisFacil.png" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="45.0" layoutY="300.0" prefHeight="604.0" prefWidth="520.0" style="-fx-background-color: #052854; -fx-background-radius: 24px; -fx-border-color: #3F648D; -fx-border-radius: 24px;">
+               <children>
+                  <Label fx:id="lblLogin" layoutX="96.0" layoutY="45.0" text="Login" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="38.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblAcesseSistema" layoutX="45.0" layoutY="102.0" text="Acesse o sistema para gerenciar seu mercadinho." textFill="#a0aec0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtUsuario" layoutX="45.0" layoutY="190.0" prefHeight="68.0" prefWidth="430.0" promptText="Usuário" style="-fx-background-color: #0A2F5D; -fx-text-fill: white; -fx-prompt-text-fill: #718096; -fx-background-radius: 12px; -fx-border-color: #3F648D; -fx-border-radius: 12px; -fx-padding: 0 0 0 52px;">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+                  <ImageView fx:id="imgIconeUsuario" fitHeight="26.0" fitWidth="26.0" layoutX="62.0" layoutY="211.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/iconeUsuario.png" />
+                     </image>
+                  </ImageView>
+                  
+                  <PasswordField fx:id="txtSenha" layoutX="45.0" layoutY="280.0" prefHeight="68.0" prefWidth="430.0" promptText="Senha" style="-fx-background-color: #0A2F5D; -fx-text-fill: white; -fx-prompt-text-fill: #718096; -fx-background-radius: 12px; -fx-border-color: #3F648D; -fx-border-radius: 12px; -fx-padding: 0 52px 0 52px;">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </PasswordField>
+                  
+                  <TextField fx:id="txtSenhaVisivel" layoutX="45.0" layoutY="280.0" prefHeight="68.0" prefWidth="430.0" promptText="Senha" style="-fx-background-color: #0A2F5D; -fx-text-fill: white; -fx-prompt-text-fill: #718096; -fx-background-radius: 12px; -fx-border-color: #3F648D; -fx-border-radius: 12px; -fx-padding: 0 52px 0 52px;" visible="false">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+
+                  <ImageView fx:id="imgIconeCadeado" fitHeight="26.0" fitWidth="26.0" layoutX="62.0" layoutY="301.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/iconeCadeado.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnEntrar" layoutX="45.0" layoutY="385.0" mnemonicParsing="false" onAction="#logar" prefHeight="68.0" prefWidth="430.0" style="-fx-background-color: #ffc107; -fx-background-radius: 30px; -fx-cursor: hand; -fx-padding: 0 0 0 20px;" text=" Entrar" textFill="#0b1624">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Button>
+                  <ImageView fx:id="imgIconeLogin" fitHeight="64.0" fitWidth="84.0" layoutX="35.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/iconeLogin.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lblCadastrese" layoutX="45.0" layoutY="476.0" prefHeight="17.0" prefWidth="64.0" style="-fx-cursor: hand;" text="Cadastre-se" textFill="WHITE" />
+                  <ImageView fx:id="imgIconeEntrar" fitHeight="60.0" fitWidth="50.0" layoutX="191.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/iconeEntrar.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imgIconeOlho" fitHeight="44.0" fitWidth="32.0" layoutX="423.0" layoutY="298.0" nodeOrientation="INHERIT" onMouseClicked="#alternarSenhaVisivel" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                     <image>
+                        <Image url="@imagens/imagemOlho.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="995.0" spacing="12.0">
+               <children>
+                  <ImageView fx:id="imgIconeLojinha" fitHeight="26.0" fitWidth="26.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/iconeLojinha.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lblSeuMercadinho" text="Seu mercadinho mais organizado!" textFill="#a0aec0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <VBox layoutX="700.0" layoutY="320.0" spacing="38.0">
+         <children>
+            <HBox prefHeight="0.0" prefWidth="812.0" spacing="30.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
