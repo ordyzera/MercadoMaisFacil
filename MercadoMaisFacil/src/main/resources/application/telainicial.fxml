@@ -9,20 +9,78 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #072041;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControleDashboard">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #072041;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TelaControleInicial">
    <children>
       <ImageView fx:id="imgLogoMercadoMaisFacil" fitHeight="155.0" fitWidth="285.0" layoutX="60.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@imagens/LogoMercadoMaisFacil.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="390.0" layoutY="130.0" prefHeight="950.0" prefWidth="1530.0" style="-fx-background-color: #0B2A52;" />
+      <AnchorPane layoutX="390.0" layoutY="130.0" prefHeight="950.0" prefWidth="1530.0" style="-fx-background-color: #0B2A52;">
+         <children>
+            <AnchorPane layoutX="1150.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #072041; -fx-background-radius: 10px; -fx-border-color: #3F648D; -fx-border-radius: 10px;">
+               <children>
+                  <Label layoutX="100.0" layoutY="30.0" text="Clientes Cadastrados" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblClientesCadastrados" layoutX="100.0" layoutY="55.0" text="0" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="395.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #072041; -fx-background-radius: 10px; -fx-border-color: #3F648D; -fx-border-radius: 10px;">
+               <children>
+                  <Label layoutX="100.0" layoutY="30.0" text="Faturamento do Mês" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblFaturamentoMes" layoutX="100.0" layoutY="55.0" text="R$ 0,00" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="18.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #072041; -fx-background-radius: 10px; -fx-border-color: #3F648D; -fx-border-radius: 10px;">
+               <children>
+                  <Label layoutX="100.0" layoutY="30.0" text="Vendas de Hoje" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblVendasHoje" layoutX="100.0" layoutY="55.0" text="R$ 0,00" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="773.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #072041; -fx-background-radius: 10px; -fx-border-color: #3F648D; -fx-border-radius: 10px;">
+               <children>
+                  <Label layoutX="100.0" layoutY="30.0" text="Produtos em Estoque" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblProdutosEstoque" layoutX="100.0" layoutY="55.0" text="0" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
       <Button layoutX="24.0" layoutY="180.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" style="-fx-background-color: #072041;" text="DASHBOARD" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="btnProdutos" layoutX="24.0" layoutY="250.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" style="-fx-background-color: #072041;" text="PRODUTOS" textFill="WHITE">
+      <Button fx:id="btnProdutos" layoutX="24.0" layoutY="250.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" style="-fx-background-color: #072041; -fx-border-color: #3F648D;" text="PRODUTOS" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -73,7 +131,7 @@
          </font>
       </TextField>
       <ComboBox fx:id="comboFuncionario" layoutX="1760.0" layoutY="45.0" prefHeight="40.0" prefWidth="150.0" promptText="Adm" style="-fx-background-color: #0B2A52;" />
-      <Button fx:id="btnDashboard" layoutX="34.0" layoutY="190.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" style="-fx-background-color: #072041;" text="DASHBOARD" textFill="WHITE">
+      <Button fx:id="btnDashboard" layoutX="24.0" layoutY="190.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" style="-fx-background-color: #072041; -fx-border-color: #3F648D;" text="DASHBOARD" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
