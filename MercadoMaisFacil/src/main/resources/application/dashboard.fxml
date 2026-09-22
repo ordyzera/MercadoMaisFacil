@@ -16,7 +16,23 @@
             <Image url="@imagens/LogoMercadoMaisFacil.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="390.0" layoutY="130.0" prefHeight="950.0" prefWidth="1530.0" style="-fx-background-color: #0B2A52;" />
+      <AnchorPane fx:id="painelDashboard" layoutX="390.0" layoutY="130.0" prefHeight="950.0" prefWidth="1530.0" style="-fx-background-color: #0B2A52;">
+         <children>
+            <AnchorPane layoutX="248.0" layoutY="222.0" prefHeight="130.0" prefWidth="330.0">
+               <children>
+                  <Label layoutX="50.0" layoutY="23.0" text="Vendas de hoje" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblVendasHoje" layoutX="60.0" layoutY="62.0" text="R$ 0,00" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
       <Button layoutX="24.0" layoutY="180.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" style="-fx-background-color: #072041;" text="DASHBOARD" textFill="WHITE">
          <font>
             <Font size="15.0" />
