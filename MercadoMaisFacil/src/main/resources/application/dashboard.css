@@ -1,0 +1,218 @@
+/* ============================= */
+/* CARD DO GRÁFICO               */
+/* ============================= */
+
+.card-grafico {
+    -fx-background-color: #072041;
+    -fx-background-radius: 10px;
+
+    -fx-border-color: #3F648D;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+}
+
+/* ============================= */
+/* ÁREA DO GRÁFICO               */
+/* ============================= */
+
+.grafico-vendas {
+    -fx-background-color: transparent;
+    -fx-padding: 0px;
+}
+
+.grafico-vendas .chart-content {
+    -fx-background-color: transparent;
+}
+
+.grafico-vendas .chart-plot-background {
+    -fx-background-color: #072A58;
+}
+
+/* ============================= */
+/* EIXOS                         */
+/* ============================= */
+
+.grafico-vendas .axis {
+    -fx-tick-label-fill: #B8C8DC;
+    -fx-font-size: 11px;
+}
+
+.grafico-vendas .axis-line {
+    -fx-stroke: #315C87;
+}
+
+.grafico-vendas .axis-tick-mark {
+    -fx-stroke: #315C87;
+}
+
+.grafico-vendas .axis-minor-tick-mark {
+    -fx-stroke: #315C87;
+}
+
+/* ============================= */
+/* GRADE                         */
+/* ============================= */
+
+.grafico-vendas .chart-horizontal-grid-lines {
+    -fx-stroke: rgba(255, 255, 255, 0.10);
+}
+
+.grafico-vendas .chart-vertical-grid-lines {
+    -fx-stroke: rgba(255, 255, 255, 0.08);
+}
+
+.grafico-vendas .chart-alternative-row-fill {
+    -fx-fill: transparent;
+}
+
+.grafico-vendas .chart-alternative-column-fill {
+    -fx-fill: transparent;
+}
+
+/* ============================= */
+/* LINHA                         */
+/* ============================= */
+
+.grafico-vendas .chart-series-area-line {
+    -fx-stroke: #2196F3;
+    -fx-stroke-width: 3px;
+}
+
+/* ============================= */
+/* PREENCHIMENTO                 */
+/* ============================= */
+
+.grafico-vendas .chart-series-area-fill {
+    -fx-fill: rgba(33, 150, 243, 0.30);
+}
+
+/* ============================= */
+/* PONTOS                        */
+/* ============================= */
+
+.grafico-vendas .chart-area-symbol {
+    -fx-background-color: #64B5F6, #2196F3;
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 7px;
+    -fx-padding: 5px;
+}
+
+/* ============================= */
+/* COMBOBOX                      */
+/* ============================= */
+
+.combo-grafico {
+    -fx-background-color: #082D5E;
+    -fx-border-color: #176DB0;
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+}
+
+.combo-grafico .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+}
+
+.combo-grafico .arrow {
+    -fx-background-color: #AFC7E3;
+}
+
+
+
+
+/* ================================= */
+/* GRÁFICO DE VENDAS POR CATEGORIA   */
+/* ================================= */
+
+.grafico-categoria {
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+}
+
+.grafico-categoria .chart-content {
+    -fx-background-color: transparent;
+}
+
+.grafico-categoria .chart-pie {
+    -fx-border-width: 0px;
+}
+
+/* Alimentos */
+.grafico-categoria .default-color0.chart-pie {
+    -fx-pie-color: #2196F3;
+}
+
+/* Bebidas */
+.grafico-categoria .default-color1.chart-pie {
+    -fx-pie-color: #5EC8F2;
+}
+
+/* Higiene */
+.grafico-categoria .default-color2.chart-pie {
+    -fx-pie-color: #FFC533;
+}
+
+/* Frios */
+.grafico-categoria .default-color3.chart-pie {
+    -fx-pie-color: #FF8A32;
+}
+
+/* Padaria */
+.grafico-categoria .default-color4.chart-pie {
+    -fx-pie-color: #7658E8;
+}
+
+/* Outros */
+.grafico-categoria .default-color5.chart-pie {
+    -fx-pie-color: #8C9AAA;
+}
+
+
+
+
+.tabela-dashboard {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.tabela-dashboard .column-header-background {
+    -fx-background-color: #0B2A52;
+}
+
+.tabela-dashboard .column-header {
+    -fx-background-color: #0B2A52;
+    -fx-border-color: transparent;
+}
+
+.tabela-dashboard .column-header .label {
+    -fx-text-fill: #B8C8DC;
+    -fx-font-weight: bold;
+}
+
+.tabela-dashboard .table-cell {
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+}
+
+.tabela-dashboard .table-row-cell {
+    -fx-background-color: #072A58;
+}
+
+.tabela-dashboard .table-row-cell:odd {
+    -fx-background-color: #082F62;
+}
+
+.tabela-dashboard .table-row-cell:selected {
+    -fx-background-color: #176DB0;
+}
+
+.tabela-dashboard .filler {
+    -fx-background-color: #0B2A52;
+}
+
+.botao-secundario {
+    -fx-background-color: #082D5E;
+    -fx-border-color: #176DB0;
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+}
