@@ -136,154 +136,45 @@
               </children>
             </StackPane>
             <!-- LEGENDA -->
-            <!-- LEGENDA -->
-<AnchorPane layoutX="365.0"
-            layoutY="80.0"
-            prefWidth="255.0"
-            prefHeight="240.0">
+            <AnchorPane layoutX="365.0" layoutY="80.0" prefWidth="255.0" prefHeight="240.0">
+              <children>
+                <Circle layoutX="8.0" layoutY="12.0" fill="#2196F3" radius="6.0"/>
+                <Label layoutX="25.0" layoutY="3.0" prefWidth="155.0" text="Alimentos" textFill="WHITE"/>
+                <Label fx:id="lblPctAlimentos" layoutX="195.0" layoutY="3.0" text="0%" textFill="WHITE">
+                  <font><Font name="Arial Bold" size="13.0"/></font>
+                </Label>
 
-    <children>
+                <Circle layoutX="8.0" layoutY="47.0" fill="#5EC8F2" radius="6.0"/>
+                <Label layoutX="25.0" layoutY="38.0" prefWidth="155.0" text="Bebidas" textFill="WHITE"/>
+                <Label fx:id="lblPctBebidas" layoutX="195.0" layoutY="38.0" text="0%" textFill="WHITE">
+                  <font><Font name="Arial Bold" size="13.0"/></font>
+                </Label>
 
-        <!-- ALIMENTOS -->
-        <Circle layoutX="8.0"
-                layoutY="12.0"
-                fill="#2196F3"
-                radius="6.0" />
+                <Circle layoutX="8.0" layoutY="82.0" fill="#FFC533" radius="6.0"/>
+                <Label layoutX="25.0" layoutY="73.0" prefWidth="155.0" text="Higiene e Limpeza" textFill="WHITE"/>
+                <Label fx:id="lblPctHigiene" layoutX="195.0" layoutY="73.0" text="0%" textFill="WHITE">
+                  <font><Font name="Arial Bold" size="13.0"/></font>
+                </Label>
 
-        <Label layoutX="25.0"
-               layoutY="3.0"
-               prefWidth="155.0"
-               text="Alimentos"
-               textFill="WHITE" />
+                <Circle layoutX="8.0" layoutY="117.0" fill="#FF8A32" radius="6.0"/>
+                <Label layoutX="25.0" layoutY="108.0" prefWidth="155.0" text="Frios e Laticínios" textFill="WHITE"/>
+                <Label fx:id="lblPctFrios" layoutX="195.0" layoutY="108.0" text="0%" textFill="WHITE">
+                  <font><Font name="Arial Bold" size="13.0"/></font>
+                </Label>
 
-        <Label fx:id="lblPctAlimentos"
-               layoutX="195.0"
-               layoutY="3.0"
-               text="0%"
-               textFill="WHITE">
-            <font>
-                <Font name="Arial Bold" size="13.0" />
-            </font>
-        </Label>
+                <Circle layoutX="8.0" layoutY="152.0" fill="#7658E8" radius="6.0"/>
+                <Label layoutX="25.0" layoutY="143.0" prefWidth="155.0" text="Padaria" textFill="WHITE"/>
+                <Label fx:id="lblPctPadaria" layoutX="195.0" layoutY="143.0" text="0%" textFill="WHITE">
+                  <font><Font name="Arial Bold" size="13.0"/></font>
+                </Label>
 
-
-        <!-- BEBIDAS -->
-        <Circle layoutX="8.0"
-                layoutY="47.0"
-                fill="#5EC8F2"
-                radius="6.0" />
-
-        <Label layoutX="25.0"
-               layoutY="38.0"
-               prefWidth="155.0"
-               text="Bebidas"
-               textFill="WHITE" />
-
-        <Label fx:id="lblPctBebidas"
-               layoutX="195.0"
-               layoutY="38.0"
-               text="0%"
-               textFill="WHITE">
-            <font>
-                <Font name="Arial Bold" size="13.0" />
-            </font>
-        </Label>
-
-
-        <!-- HIGIENE -->
-        <Circle layoutX="8.0"
-                layoutY="82.0"
-                fill="#FFC533"
-                radius="6.0" />
-
-        <Label layoutX="25.0"
-               layoutY="73.0"
-               prefWidth="155.0"
-               text="Higiene e Limpeza"
-               textFill="WHITE" />
-
-        <Label fx:id="lblPctHigiene"
-               layoutX="195.0"
-               layoutY="73.0"
-               text="0%"
-               textFill="WHITE">
-            <font>
-                <Font name="Arial Bold" size="13.0" />
-            </font>
-        </Label>
-
-
-        <!-- FRIOS -->
-        <Circle layoutX="8.0"
-                layoutY="117.0"
-                fill="#FF8A32"
-                radius="6.0" />
-
-        <Label layoutX="25.0"
-               layoutY="108.0"
-               prefWidth="155.0"
-               text="Frios e Laticínios"
-               textFill="WHITE" />
-
-        <Label fx:id="lblPctFrios"
-               layoutX="195.0"
-               layoutY="108.0"
-               text="0%"
-               textFill="WHITE">
-            <font>
-                <Font name="Arial Bold" size="13.0" />
-            </font>
-        </Label>
-
-
-        <!-- PADARIA -->
-        <Circle layoutX="8.0"
-                layoutY="152.0"
-                fill="#7658E8"
-                radius="6.0" />
-
-        <Label layoutX="25.0"
-               layoutY="143.0"
-               prefWidth="155.0"
-               text="Padaria"
-               textFill="WHITE" />
-
-        <Label fx:id="lblPctPadaria"
-               layoutX="195.0"
-               layoutY="143.0"
-               text="0%"
-               textFill="WHITE">
-            <font>
-                <Font name="Arial Bold" size="13.0" />
-            </font>
-        </Label>
-
-
-        <!-- OUTROS -->
-        <Circle layoutX="8.0"
-                layoutY="187.0"
-                fill="#8C9AAA"
-                radius="6.0" />
-
-        <Label layoutX="25.0"
-               layoutY="178.0"
-               prefWidth="155.0"
-               text="Outros"
-               textFill="WHITE" />
-
-        <Label fx:id="lblPctOutros"
-               layoutX="195.0"
-               layoutY="178.0"
-               text="0%"
-               textFill="WHITE">
-            <font>
-                <Font name="Arial Bold" size="13.0" />
-            </font>
-        </Label>
-
-    </children>
-
-</AnchorPane>
+                <Circle layoutX="8.0" layoutY="187.0" fill="#8C9AAA" radius="6.0"/>
+                <Label layoutX="25.0" layoutY="178.0" prefWidth="155.0" text="Outros" textFill="WHITE"/>
+                <Label fx:id="lblPctOutros" layoutX="195.0" layoutY="178.0" text="0%" textFill="WHITE">
+                  <font><Font name="Arial Bold" size="13.0"/></font>
+                </Label>
+              </children>
+            </AnchorPane>
           </children>
         </AnchorPane>
         <AnchorPane layoutX="18.0" layoutY="650.0" prefHeight="270.0" prefWidth="650.0" styleClass="card-grafico">
@@ -299,6 +190,29 @@
                 <TableColumn fx:id="colProdutoEstoque" prefWidth="290.0" text="Produto"/>
                 <TableColumn fx:id="colEstoqueAtual" prefWidth="160.0" text="Estoque Atual"/>
                 <TableColumn fx:id="colEstoqueMinimo" prefWidth="165.0" text="Estoque Mínimo"/>
+              </columns>
+            </TableView>
+          </children>
+        </AnchorPane>
+        <!-- ÚLTIMAS VENDAS -->
+        <AnchorPane layoutX="685.0" layoutY="650.0" prefHeight="270.0" prefWidth="650.0" styleClass="card-grafico">
+          <children>
+            <Label layoutX="22.0" layoutY="15.0" text="Últimas Vendas" textFill="WHITE">
+              <font>
+                <Font name="Arial Bold" size="16.0"/>
+              </font>
+            </Label>
+
+            <Button layoutX="540.0" layoutY="10.0" prefHeight="30.0" prefWidth="85.0"
+                    text="Ver todas" textFill="WHITE" styleClass="botao-secundario"/>
+
+            <TableView fx:id="tabelaUltimasVendas" layoutX="15.0" layoutY="55.0"
+                       prefHeight="195.0" prefWidth="620.0" styleClass="tabela-dashboard">
+              <columns>
+                <TableColumn fx:id="colProdutoVenda" prefWidth="200.0" text="Produto"/>
+                <TableColumn fx:id="colClienteVenda" prefWidth="160.0" text="Cliente"/>
+                <TableColumn fx:id="colDataVenda" prefWidth="140.0" text="Data"/>
+                <TableColumn fx:id="colValorVenda" prefWidth="115.0" text="Valor"/>
               </columns>
             </TableView>
           </children>

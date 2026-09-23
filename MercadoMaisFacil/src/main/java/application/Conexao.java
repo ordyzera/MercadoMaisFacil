@@ -9,8 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import java.math.BigDecimal;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -24,7 +22,7 @@ public class Conexao {
 	
 	private static final String USUARIO = "root";
 	
-	private static final String SENHA = "1206";
+	private static final String SENHA = "Aluno";
 	
 	 public static Connection conectar() {
 	        try {

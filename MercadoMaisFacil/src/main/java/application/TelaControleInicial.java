@@ -126,6 +126,21 @@ public class TelaControleInicial {
     private TableColumn<ProdutoEstoqueBaixo, Integer> colEstoqueMinimo;
     
     @FXML
+    private TableView<UltimaVenda> tabelaUltimasVendas;
+
+    @FXML
+    private TableColumn<UltimaVenda, String> colProdutoVenda;
+
+    @FXML
+    private TableColumn<UltimaVenda, String> colClienteVenda;
+
+    @FXML
+    private TableColumn<UltimaVenda, String> colDataVenda;
+
+    @FXML
+    private TableColumn<UltimaVenda, String> colValorVenda;
+    
+    @FXML
     public void initialize() {
     	
     	graficoVendas7Dias.setLegendVisible(false);
