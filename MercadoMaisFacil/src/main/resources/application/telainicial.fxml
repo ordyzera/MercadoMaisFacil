@@ -26,7 +26,6 @@
     </ImageView>
     <AnchorPane layoutX="390.0" layoutY="130.0" prefHeight="950.0" prefWidth="1530.0" style="-fx-background-color: #0B2A52;" stylesheets="@dashboard.css">
       <children>
-        <!-- VENDAS POR CATEGORIA -->
         <!-- PRODUTOS COM ESTOQUE BAIXO -->
         <AnchorPane layoutX="18.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #072041; -fx-background-radius: 10px; -fx-border-color: #3F648D; -fx-border-radius: 10px;">
           <children>
