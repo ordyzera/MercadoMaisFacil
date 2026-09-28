@@ -1,5 +1,8 @@
 package application;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -280,5 +283,67 @@ public class Conexao {
 		    return produtos;
 		}
 	 
+	 public static List<UltimaVenda> buscarUltimasVendas() {
+
+		    List<UltimaVenda> vendas = new ArrayList<>();
+
+		    String sql = """
+		        SELECT
+		            v.id,
+		            COALESCE(
+		                GROUP_CONCAT(p.nome ORDER BY p.nome SEPARATOR ', '),
+		                'Sem produtos'
+		            ) AS produto,
+		            COALESCE(c.nome, 'Cliente não informado') AS cliente,
+		            DATE_FORMAT(v.data_venda, '%d/%m/%Y %H:%i') AS data,
+		            v.valor_total
+		        FROM vendas v
+		        LEFT JOIN clientes c
+		            ON c.id = v.cliente_id
+		        LEFT JOIN itens_venda iv
+		            ON iv.venda_id = v.id
+		        LEFT JOIN produtos p
+		            ON p.id = iv.produto_id
+		        GROUP BY
+		            v.id,
+		            c.nome,
+		            v.data_venda,
+		            v.valor_total
+		        ORDER BY v.data_venda DESC, v.id DESC
+		        LIMIT 5
+		        """;
+
+		    try (
+		        Connection conexao = conectar();
+		        PreparedStatement comando = conexao.prepareStatement(sql);
+		        ResultSet resultado = comando.executeQuery()
+		    ) {
+
+		        NumberFormat moeda =
+		                NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+
+		        while (resultado.next()) {
+
+		            UltimaVenda venda =
+		                    new UltimaVenda(
+		                            resultado.getString("produto"),
+		                            resultado.getString("cliente"),
+		                            resultado.getString("data"),
+		                            moeda.format(
+		                                    resultado.getBigDecimal("valor_total")
+		                            )
+		                    );
+
+		            vendas.add(venda);
+		        }
+
+		    } catch (SQLException e) {
+
+		        System.out.println("Erro ao buscar últimas vendas:");
+		        System.out.println(e.getMessage());
+		    }
+
+		    return vendas;
+		}
 	 
 }
