@@ -66,6 +66,8 @@ public class TelaControleInicial {
         btnDashboard.setOnAction(
             evento -> carregarTela("dashboard.fxml")
         );
+        
+        btnProdutos.setOnAction(evento -> carregarTela("produtos.fxml"));
     }
 
     private void carregarTela(String arquivo) {

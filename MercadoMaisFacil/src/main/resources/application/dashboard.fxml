@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" prefHeight="950.0" prefWidth="1530.0" style="-fx-background-color: #0B2A52;" stylesheets="@dashboard.css" fx:controller="application.ControleDashboard" fx:id="painelDashboard">
+<AnchorPane fx:id="painelDashboard" prefHeight="950.0" prefWidth="1530.0" style="-fx-background-color: #0B2A52;" stylesheets="@dashboard.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControleDashboard">
     <children>
         <AnchorPane layoutX="18.0" layoutY="10.0" prefHeight="60.0" prefWidth="1492.0">
             <children>
@@ -207,7 +207,7 @@
         </AnchorPane>
         <AnchorPane layoutX="18.0" layoutY="650.0" prefHeight="270.0" prefWidth="825.0" styleClass="card-grafico">
             <children>
-                <Label layoutX="22.0" layoutY="15.0" text="Produtos com Estoque Baixo" textFill="WHITE">
+                <Label layoutX="22.0" layoutY="19.0" text="Produtos com Estoque Baixo" textFill="WHITE">
                     <font>
                         <Font name="Arial Bold" size="16.0" />
                     </font>
