@@ -1,5 +1,7 @@
 package application;
 
+import java.math.BigDecimal;
+
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -55,28 +57,28 @@ public class ControleProdutos {
     // =========================================================
 
     @FXML
-    private TableColumn<Produto, Void> colAcoes;
+    private TableColumn<Produtos, Void> colAcoes;
 
     @FXML
-    private TableColumn<Produto, String> colCategoria;
+    private TableColumn<Produtos, String> colCategoria;
 
     @FXML
-    private TableColumn<Produto, String> colCodigo;
+    private TableColumn<Produtos, String> colCodigo;
 
     @FXML
-    private TableColumn<Produto, String> colEstoque;
+    private TableColumn<Produtos, String> colEstoque;
 
     @FXML
-    private TableColumn<Produto, String> colMarca;
+    private TableColumn<Produtos, String> colMarca;
 
     @FXML
-    private TableColumn<Produto, String> colPreco;
+    private TableColumn<Produtos, String> colPreco;
 
     @FXML
-    private TableColumn<Produto, String> colProduto;
+    private TableColumn<Produtos, String> colProduto;
 
     @FXML
-    private TableColumn<Produto, String> colStatus;
+    private TableColumn<Produtos, String> colStatus;
 
     // =========================================================
     // COMBOBOX
@@ -89,10 +91,10 @@ public class ControleProdutos {
     private ComboBox<?> comboAllStatus;
 
     @FXML
-    private ComboBox<?> comboUnidade;
+    private ComboBox<String> comboUnidade;
 
     @FXML
-    private ComboBox<?> txtCategoria;
+    private ComboBox<String> comboCategoria;
 
     // =========================================================
     // LABELS
@@ -127,7 +129,7 @@ public class ControleProdutos {
     // =========================================================
 
     @FXML
-    private TableView<Produto> tableProdutos;
+    private TableView<Produtos> tableProdutos;
 
     @FXML
     private Pagination paginacaoProdutos;
@@ -149,13 +151,13 @@ public class ControleProdutos {
     private TextField txtPesquisarProdutos;
 
     @FXML
-    private TextField txtPreço;
+    private TextField txtPreco;
 
     // =========================================================
     // DADOS
     // =========================================================
 
-    private final ObservableList<Produto> todosProdutos =
+    private final ObservableList<Produtos> todosProdutos =
             FXCollections.observableArrayList();
 
     private Timeline relogio;
@@ -166,6 +168,9 @@ public class ControleProdutos {
 
     @FXML
     public void initialize() {
+    	
+    	configurarUnidades();
+    	carregarCategorias();
 
         configurarColunas();
         configurarColunaAcoes();
@@ -174,7 +179,11 @@ public class ControleProdutos {
         atualizarDataHora();
         iniciarRelogio();
 
-        atualizarPaginacao();
+        // Carrega os produtos reais do MySQL
+        definirProdutos(Conexao.buscarProdutos());
+        
+        btnSalvarProduto.setOnAction(evento -> salvarProduto());
+    	btnLimparCampos.setOnAction(evento -> limparCampos);
     }
 
     // =========================================================
@@ -240,7 +249,7 @@ public class ControleProdutos {
         return texto;
     }
 
-    private String formatarPreco(Produto produto) {
+    private String formatarPreco(Produtos produto) {
 
         if (produto.getPreco() == null) {
             return "R$ 0,00";
@@ -261,7 +270,7 @@ public class ControleProdutos {
     private void configurarColunaAcoes() {
 
         colAcoes.setCellFactory(coluna ->
-                new TableCell<Produto, Void>() {
+                new TableCell<Produtos, Void>() {
 
             private final Button btnVisualizar =
                     criarBotaoAcao(
@@ -296,9 +305,7 @@ public class ControleProdutos {
                 caixaAcoes.setAlignment(Pos.CENTER);
 
                 btnVisualizar.setOnAction(evento -> {
-
-                    Produto produto =
-                            getTableRow().getItem();
+                    Produtos produto = getTableRow().getItem();
 
                     if (produto != null) {
                         visualizarProduto(produto);
@@ -306,9 +313,7 @@ public class ControleProdutos {
                 });
 
                 btnEditar.setOnAction(evento -> {
-
-                    Produto produto =
-                            getTableRow().getItem();
+                    Produtos produto = getTableRow().getItem();
 
                     if (produto != null) {
                         editarProduto(produto);
@@ -316,9 +321,7 @@ public class ControleProdutos {
                 });
 
                 btnExcluir.setOnAction(evento -> {
-
-                    Produto produto =
-                            getTableRow().getItem();
+                    Produtos produto = getTableRow().getItem();
 
                     if (produto != null) {
                         excluirProduto(produto);
@@ -327,9 +330,7 @@ public class ControleProdutos {
             }
 
             @Override
-            protected void updateItem(
-                    Void item,
-                    boolean vazio) {
+            protected void updateItem(Void item, boolean vazio) {
 
                 super.updateItem(item, vazio);
 
@@ -340,7 +341,6 @@ public class ControleProdutos {
                     setGraphic(null);
 
                 } else {
-
                     setGraphic(caixaAcoes);
                 }
             }
@@ -422,8 +422,7 @@ public class ControleProdutos {
 
         if (paginaAtual >= totalPaginas) {
 
-            paginaAtual =
-                    totalPaginas - 1;
+            paginaAtual = totalPaginas - 1;
 
             paginacaoProdutos
                     .setCurrentPageIndex(
@@ -435,8 +434,7 @@ public class ControleProdutos {
         atualizarTotalProdutos();
     }
 
-    private void atualizarPagina(
-            int indicePagina) {
+    private void atualizarPagina(int indicePagina) {
 
         int totalProdutos =
                 todosProdutos.size();
@@ -470,7 +468,7 @@ public class ControleProdutos {
                         totalProdutos
                 );
 
-        ObservableList<Produto> produtosDaPagina =
+        ObservableList<Produtos> produtosDaPagina =
                 FXCollections.observableArrayList(
                         todosProdutos.subList(
                                 inicio,
@@ -495,26 +493,59 @@ public class ControleProdutos {
 
     private void atualizarTotalProdutos() {
 
-        String total =
-                String.valueOf(
-                        todosProdutos.size()
-                );
+        int totalProdutos = todosProdutos.size();
 
-        if (lblTotalProdutos != null) {
-            lblTotalProdutos.setText(total);
-        }
+        long produtosAtivos = todosProdutos.stream()
+                .filter(Produtos::isAtivo)
+                .count();
+
+        long estoqueBaixo = todosProdutos.stream()
+                .filter(produto ->
+                        produto.getQuantidade()
+                                <= produto.getEstoqueMinimo()
+                )
+                .count();
+
+        long totalCategorias = todosProdutos.stream()
+                .filter(produto ->
+                        produto.getCategoriaId() != null
+                )
+                .map(Produtos::getCategoriaId)
+                .distinct()
+                .count();
+
+        // Total de produtos
+        lblTotalProdutos.setText(
+                String.valueOf(totalProdutos)
+        );
 
         if (lblTotalProdutosLista != null) {
-            lblTotalProdutosLista.setText(total);
+            lblTotalProdutosLista.setText(
+                    String.valueOf(totalProdutos)
+            );
         }
+
+        // Produtos ativos
+        lblProdutosAtivos.setText(
+                String.valueOf(produtosAtivos)
+        );
+
+        // Produtos com estoque baixo
+        lblEstoqueBaixo.setText(
+                String.valueOf(estoqueBaixo)
+        );
+
+        // Categorias utilizadas pelos produtos
+        lblCategorias.setText(
+                String.valueOf(totalCategorias)
+        );
     }
 
     // =========================================================
     // RECEBE PRODUTOS DO BANCO
     // =========================================================
 
-    public void definirProdutos(
-            List<Produto> produtos) {
+    public void definirProdutos(List<Produtos> produtos) {
 
         todosProdutos.setAll(produtos);
 
@@ -524,8 +555,7 @@ public class ControleProdutos {
         atualizarPaginacao();
     }
 
-    public void adicionarProduto(
-            Produto produto) {
+    public void adicionarProduto(Produtos produto) {
 
         if (produto == null) {
             return;
@@ -540,8 +570,7 @@ public class ControleProdutos {
     // AÇÕES
     // =========================================================
 
-    private void visualizarProduto(
-            Produto produto) {
+    private void visualizarProduto(Produtos produto) {
 
         Alert alerta =
                 new Alert(
@@ -597,8 +626,7 @@ public class ControleProdutos {
         alerta.showAndWait();
     }
 
-    private void editarProduto(
-            Produto produto) {
+    private void editarProduto(Produtos produto) {
 
         Alert alerta =
                 new Alert(
@@ -624,8 +652,7 @@ public class ControleProdutos {
         alerta.showAndWait();
     }
 
-    private void excluirProduto(
-            Produto produto) {
+    private void excluirProduto(Produtos produto) {
 
         Alert confirmacao =
                 new Alert(
@@ -653,8 +680,7 @@ public class ControleProdutos {
                 .showAndWait()
                 .ifPresent(resposta -> {
 
-                    if (resposta
-                            == ButtonType.OK) {
+                    if (resposta == ButtonType.OK) {
 
                         todosProdutos.remove(
                                 produto
@@ -739,4 +765,81 @@ public class ControleProdutos {
             );
         }
     }
+    
+    // =========================================================
+    // CONFIGURAÇÃO DAS UNIDADES
+    // =========================================================
+    
+    private void configurarUnidades() {
+    	
+    	comboUnidade.getItems().setAll(
+    			"UN",
+    			"KG",
+    			"G",
+    			"l",
+    			"ML"
+    			);
+    }
+    
+    // =========================================================
+    // CARREGAR CATEGORIAS
+    // =========================================================
+    
+    private void carregarCategorias() {
+    	
+    	comboCategoria.getItems().setAll(
+    			
+    			Conexao.buscarNomesCategorias()
+    			);
+    }
+    
+    // =========================================================
+    // FUNÇÃO SALVAR PRODUTOS
+    // =========================================================
+    
+    private void salvarProduto() {
+    	
+    	String nome = txtNomeProduto.getText().strip();
+    	String codigoBarras = txtCodBarras.getText().strip();
+    	String precoTexto = txtPreco.getText().strip();
+    	String estoqueTexto = txtEstoqueInicial.getText().strip();
+    	
+    	String categoriaSelecionada = comboCategoria.getValue();
+    	
+    	String unidadeSelecionada = comboUnidade.getValue();
+    	
+    	// Validação dos campos obrigatórios
+    	if(nome.isEmpty()
+    			|| precoTexto.isEmpty()
+    			|| estoqueTexto.isEmpty()
+    			|| categoriaSelecionada == null
+    			|| unidadeSelecionada == null
+    			) {
+    		Alert alerta = new Alert(
+    				Alert.AlertType.WARNING
+    	    );
+    		
+    		alerta.setTitle("Campos obrigatórios"
+    		);
+    		alerta.setHeaderText("Preencha os campos obrigatórios"
+    		);
+    		alerta.setContentText("Nome, Categoria, Preço, Estoque Inicial" + "e Unidade devem ser preenchidos."
+    		);
+    		
+    		alerta.showAndWait();
+    		return;
+    	}
+    	
+    	try {
+    		
+    		// Aceita 12,90 ou 12.90
+    		BigDecimal preco = new BigDecimal(precoTexto.replace(",",".")
+    				);
+    		
+    	} catch {}
+    	
+    }
+    
+    
+    
 }

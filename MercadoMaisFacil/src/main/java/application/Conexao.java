@@ -25,7 +25,7 @@ public class Conexao {
 	
 	private static final String USUARIO = "root";
 	
-	private static final String SENHA = "1206";
+	private static final String SENHA = "Aluno";
 	
 	 public static Connection conectar() {
 	        try {
@@ -345,5 +345,270 @@ public class Conexao {
 
 		    return vendas;
 		}
-	 
+
+
+    // =========================================================
+    // PRODUTOS - ABA PRODUTOS
+    // =========================================================
+
+    public static List<Produtos> buscarProdutos() {
+
+        List<Produtos> produtos = new ArrayList<>();
+
+        String sql = """
+            SELECT
+                p.id,
+                p.nome,
+                p.codigo_barras,
+                p.marca,
+                p.preco,
+                p.quantidade,
+                p.estoque_minimo,
+                p.unidade,
+                p.ativo,
+                p.categoria_id,
+                c.nome AS categoria
+            FROM produtos p
+            LEFT JOIN categorias c
+                ON c.id = p.categoria_id
+            ORDER BY p.nome
+            """;
+
+        try (
+            Connection conexao = conectar();
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            ResultSet resultado = comando.executeQuery()
+        ) {
+
+            while (resultado.next()) {
+
+                int categoriaIdBanco =
+                        resultado.getInt("categoria_id");
+
+                Integer categoriaId =
+                        resultado.wasNull()
+                                ? null
+                                : categoriaIdBanco;
+
+                Produtos produto = new Produtos(
+                        resultado.getInt("id"),
+                        resultado.getString("nome"),
+                        resultado.getString("codigo_barras"),
+                        resultado.getString("marca"),
+                        resultado.getBigDecimal("preco"),
+                        resultado.getInt("quantidade"),
+                        resultado.getInt("estoque_minimo"),
+                        resultado.getString("unidade"),
+                        resultado.getBoolean("ativo"),
+                        categoriaId,
+                        resultado.getString("categoria")
+                );
+
+                produtos.add(produto);
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Erro ao buscar produtos:");
+            System.out.println(e.getMessage());
+        }
+
+        return produtos;
+    }
+    
+    public static List<String> buscarNomesCategorias() {
+
+        List<String> categorias = new ArrayList<>();
+
+        String sql = """
+            SELECT nome
+            FROM categorias
+            ORDER BY nome
+            """;
+
+        try (
+            Connection conexao = conectar();
+            PreparedStatement comando =
+                    conexao.prepareStatement(sql);
+            ResultSet resultado =
+                    comando.executeQuery()
+        ) {
+
+            while (resultado.next()) {
+
+                categorias.add(
+                        resultado.getString("nome")
+                );
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println(
+                    "Erro ao buscar categorias:"
+            );
+
+            System.out.println(
+                    e.getMessage()
+            );
+        }
+
+        return categorias;
+    }
+    
+    public static boolean cadastrarProdutos(Produtos produto) {
+    	
+    	String sql = """
+    			
+    			INSERT INTO produtos(
+    			nome,
+    			codigo_barras,
+    			marca,
+    			preco,
+    			quantidade,
+    			estoque_minimo,
+    			unidade,
+    			ativo,
+    			categoria_id
+    			)
+    			VALUES(
+    				 ?,
+    			     ?,
+    			     ?,
+    			     ?,
+    			     ?,
+    			     ?,
+    			     ?,
+    			     ?,
+    			     ?
+    			)
+    			
+    			""";
+    	
+    	 try (
+    		        Connection conexao = conectar();
+    		        PreparedStatement comando =
+    		                conexao.prepareStatement(sql)
+    		    ) {
+
+    		        comando.setString(
+    		                1,
+    		                produto.getNome()
+    		        );
+
+    		        comando.setString(
+    		                2,
+    		                produto.getCodigoBarras()
+    		        );
+
+    		        comando.setString(
+    		                3,
+    		                produto.getMarca()
+    		        );
+
+    		        comando.setBigDecimal(
+    		                4,
+    		                produto.getPreco()
+    		        );
+
+    		        comando.setInt(
+    		                5,
+    		                produto.getQuantidade()
+    		        );
+
+    		        comando.setInt(
+    		                6,
+    		                produto.getEstoqueMinimo()
+    		        );
+
+    		        comando.setString(
+    		                7,
+    		                produto.getUnidade()
+    		        );
+
+    		        comando.setBoolean(
+    		                8,
+    		                produto.isAtivo()
+    		        );
+
+    		        if (produto.getCategoriaId() != null) {
+
+    		            comando.setInt(
+    		                    9,
+    		                    produto.getCategoriaId()
+    		            );
+
+    		        } else {
+
+    		            comando.setNull(
+    		                    9,
+    		                    java.sql.Types.INTEGER
+    		            );
+    		        }
+
+    		        int linhasAfetadas =
+    		                comando.executeUpdate();
+
+    		        return linhasAfetadas > 0;
+
+    		    } catch (SQLException e) {
+
+    		        System.out.println(
+    		                "Erro ao cadastrar produto:"
+    		        );
+
+    		        System.out.println(
+    		                e.getMessage()
+    		        );
+
+    		        return false;
+    		    }
+    		}
+    public static Integer buscarIdCategoria(
+            String nomeCategoria) {
+
+        String sql = """
+            SELECT id
+            FROM categorias
+            WHERE nome = ?
+            """;
+
+        try (
+            Connection conexao = conectar();
+            PreparedStatement comando =
+                    conexao.prepareStatement(sql)
+        ) {
+
+            comando.setString(
+                    1,
+                    nomeCategoria
+            );
+
+            try (
+                ResultSet resultado =
+                        comando.executeQuery()
+            ) {
+
+                if (resultado.next()) {
+
+                    return resultado.getInt("id");
+                }
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println(
+                    "Erro ao buscar categoria:"
+            );
+
+            System.out.println(
+                    e.getMessage()
+            );
+        }
+
+        return null;
+    }
+    
+    
+
 }
+
