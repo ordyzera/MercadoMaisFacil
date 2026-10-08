@@ -455,7 +455,7 @@ public class Conexao {
         return categorias;
     }
     
-    public static boolean cadastrarProdutos(Produtos produto) {
+    public static boolean cadastrarProduto(Produtos produto) {
     	
     	String sql = """
     			
@@ -606,9 +606,57 @@ public class Conexao {
         }
 
         return null;
+    	}
+    
+    public static boolean atualizarProduto(Produtos produto) {
+    	
+    	String sql = """
+    			UPDATE produtos
+    			SET
+    				nome = ?,
+    				codigo_barras = ?,
+    				marca = ?,
+    				preco = ?,
+    				quantidade = ?,
+    				estoque_minimo = ?,
+    				unidade = ?,
+    				ativo = ?,
+    				categoria_id = ?
+    			WHERE id = ?
+    			""";
+    	
+    	try (Connection conexao = conectar(); 
+    			PreparedStatement comando = conexao.prepareStatement(sql)) {
+    		
+    		comando.setString(1, produto.getNome());
+    		comando.setString(2, produto.getCodigoBArras());
+    		comando.setString(3, produto.getMarca());
+    		comando.setBigDecimal(4, produto.getPreco());
+    		comando.setInt(5, produto.getQuantidade());
+    		comando.setInt(6, produto.getEstoqueMinimo());
+    		comando.setString(7, produto.getUnidade());
+    		comando.setBoolean(8, produto.isAtivo());
+    		
+    		if (produto.getCategoriaId() != null) {
+    			
+    			comando.setNull(9, produto.getCategoriaId());
+    			
+    		} else {
+    			comando.setNull(9, java.sql.Types.INTEGER);
+    			
+    		}
+    		
+    		comando.setInt(10, produto.getId());
+    		
+    		return comando.executeUpdate() > 0;
+    		
+    		
+    	} catch (SQLException e) {
+    		System.out.println("Erro ao atualizar produto:");
+    		System.out.println(e.getMessage());
+    		return false;
+    	}
     }
-    
-    
-
+    	
 }
 

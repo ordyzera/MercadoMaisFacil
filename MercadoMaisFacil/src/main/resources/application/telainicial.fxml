@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #072041;" fx:controller="application.TelaControleInicial">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #072041;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TelaControleInicial">
     <children>
         <ImageView fx:id="imgLogoMercadoMaisFacil" fitHeight="155.0" fitWidth="285.0" layoutX="60.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -75,7 +75,7 @@
                 <Font size="15.0" />
             </font>
         </Button>
-        <TextField fx:id="txtPesquisa" layoutX="1030.0" layoutY="45.0" prefHeight="40.0" prefWidth="550.0" promptText="Pesquisar produtos, clientes, vendas..." style="-fx-background-color: #0B2A52;">
+        <TextField fx:id="txtPesquisa" layoutX="1030.0" layoutY="45.0" prefHeight="40.0" prefWidth="550.0" promptText="Pesquisar produtos, clientes, vendas..." style="-fx-background-color: #0B2A52; -fx-text-fill: white; -fx-prompt-text-fill: #71849C;">
             <font>
                 <Font name="Arial" size="15.0" />
             </font>

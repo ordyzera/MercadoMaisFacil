@@ -36,19 +36,19 @@
 
 
 
-            <TextField fx:id="txtNomeProduto" layoutX="14.0" layoutY="130.0" prefHeight="35.0" prefWidth="332.0" promptText="Ex.: Arroz Tipo 1 - 5kg" style="-fx-background-color: #0B2A52; -fx-background-radius: 5px; -fx-border-color: #3F648D; -fx-border-radius: 5px;" />
+            <TextField fx:id="txtNomeProduto" layoutX="14.0" layoutY="130.0" prefHeight="35.0" prefWidth="332.0" promptText="Ex.: Arroz Tipo 1 - 5kg" style="-fx-background-color: #0B2A52; -fx-background-radius: 5px; -fx-border-color: #3F648D; -fx-border-radius: 5px; -fx-text-fill: white; -fx-prompt-text-fill: #71849C;" />
 
 
 
-            <TextField fx:id="txtCodBarras" layoutX="14.0" layoutY="225.0" prefHeight="35.0" prefWidth="332.0" promptText="Ex.: 78910000000012" style="-fx-background-color: #0B2A52; -fx-background-radius: 5px; -fx-border-color: #3F648D; -fx-border-radius: 5px;" />
+            <TextField fx:id="txtCodBarras" layoutX="14.0" layoutY="225.0" prefHeight="35.0" prefWidth="332.0" promptText="Ex.: 78910000000012" style="-fx-background-color: #0B2A52; -fx-background-radius: 5px; -fx-border-color: #3F648D; -fx-border-radius: 5px; -fx-text-fill: white; -fx-prompt-text-fill: #71849C;" />
 
 
 
-            <TextField fx:id="txtPreço" layoutX="14.0" layoutY="415.0" prefHeight="35.0" prefWidth="158.0" promptText="0,00" style="-fx-background-color: #0B2A52; -fx-background-radius: 5px; -fx-border-color: #3F648D; -fx-border-radius: 5px;" />
+            <TextField fx:id="txtPreco" layoutX="14.0" layoutY="415.0" prefHeight="35.0" prefWidth="158.0" promptText="0,00" style="-fx-background-color: #0B2A52; -fx-background-radius: 5px; -fx-border-color: #3F648D; -fx-border-radius: 5px; -fx-base: #0B2A52; -fx-text-fill: white; -fx-prompt-text-fill: #71849C;" />
 
 
 
-            <TextField fx:id="txtEstoqueInicial" layoutX="189.0" layoutY="415.0" prefHeight="35.0" prefWidth="158.0" promptText="0" style="-fx-background-color: #0B2A52; -fx-background-radius: 5px; -fx-border-color: #3F648D; -fx-border-radius: 5px;" />
+            <TextField fx:id="txtEstoqueInicial" layoutX="189.0" layoutY="415.0" prefHeight="35.0" prefWidth="158.0" promptText="0" style="-fx-background-color: #0B2A52; -fx-background-radius: 5px; -fx-border-color: #3F648D; -fx-border-radius: 5px; -fx-base: #0B2A52; -fx-text-fill: white; -fx-prompt-text-fill: #71849C;" />
 
 
 
@@ -439,7 +439,7 @@
 
 
 
-            <TextField fx:id="txtPesquisarProdutos" layoutX="14.0" layoutY="60.0" prefHeight="35.0" prefWidth="372.0" promptText="Buscar produto" style="-fx-background-color: #072041; -fx-background-radius: 5px; -fx-border-color: #3F648D; -fx-border-radius: 5px; -fx-padding: 0 0 0 52px;" />
+            <TextField fx:id="txtPesquisarProdutos" layoutX="14.0" layoutY="60.0" prefHeight="35.0" prefWidth="372.0" promptText="Buscar produto" style="-fx-background-color: #072041; -fx-background-radius: 5px; -fx-border-color: #3F648D; -fx-border-radius: 5px; -fx-padding: 0 0 0 52px; -fx-text-fill: white; -fx-prompt-text-fill: #71849C;" />
 
 
 

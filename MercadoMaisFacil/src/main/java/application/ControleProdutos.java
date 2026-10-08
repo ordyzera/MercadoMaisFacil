@@ -1,7 +1,6 @@
 package application;
 
 import java.math.BigDecimal;
-
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -161,6 +161,8 @@ public class ControleProdutos {
             FXCollections.observableArrayList();
 
     private Timeline relogio;
+    
+    private Produtos produtoEmEdicao = null;
 
     // =========================================================
     // INITIALIZE
@@ -168,9 +170,9 @@ public class ControleProdutos {
 
     @FXML
     public void initialize() {
-    	
-    	configurarUnidades();
-    	carregarCategorias();
+
+        configurarUnidades();
+        carregarCategorias();
 
         configurarColunas();
         configurarColunaAcoes();
@@ -181,9 +183,9 @@ public class ControleProdutos {
 
         // Carrega os produtos reais do MySQL
         definirProdutos(Conexao.buscarProdutos());
-        
+
         btnSalvarProduto.setOnAction(evento -> salvarProduto());
-    	btnLimparCampos.setOnAction(evento -> limparCampos);
+        btnLimparCampos.setOnAction(evento -> limparCampos());
     }
 
     // =========================================================
@@ -341,6 +343,7 @@ public class ControleProdutos {
                     setGraphic(null);
 
                 } else {
+
                     setGraphic(caixaAcoes);
                 }
             }
@@ -514,7 +517,6 @@ public class ControleProdutos {
                 .distinct()
                 .count();
 
-        // Total de produtos
         lblTotalProdutos.setText(
                 String.valueOf(totalProdutos)
         );
@@ -525,17 +527,14 @@ public class ControleProdutos {
             );
         }
 
-        // Produtos ativos
         lblProdutosAtivos.setText(
                 String.valueOf(produtosAtivos)
         );
 
-        // Produtos com estoque baixo
         lblEstoqueBaixo.setText(
                 String.valueOf(estoqueBaixo)
         );
 
-        // Categorias utilizadas pelos produtos
         lblCategorias.setText(
                 String.valueOf(totalCategorias)
         );
@@ -567,14 +566,14 @@ public class ControleProdutos {
     }
 
     // =========================================================
-    // AÇÕES
+    // AÇÕES DA TABELA
     // =========================================================
 
     private void visualizarProduto(Produtos produto) {
 
         Alert alerta =
                 new Alert(
-                        Alert.AlertType.INFORMATION
+                        AlertType.INFORMATION
                 );
 
         alerta.setTitle(
@@ -628,35 +627,31 @@ public class ControleProdutos {
 
     private void editarProduto(Produtos produto) {
 
-        Alert alerta =
-                new Alert(
-                        Alert.AlertType.INFORMATION
-                );
-
-        alerta.setTitle(
-                "Editar Produto"
-        );
-
-        alerta.setHeaderText(
-                "Produto selecionado: "
-                        + produto.getNome()
-        );
-
-        alerta.setContentText(
-                "O botão Editar já está ligado "
-                        + "ao produto desta linha.\n\n"
-                        + "Depois vamos preencher o formulário "
-                        + "com os dados dele."
-        );
-
-        alerta.showAndWait();
+        produtoEmEdicao = produto;
+        
+        txtNomeProduto.setText(produto.getNome());
+        
+        txtCodBarras.setText(produto.getCodigoBarras() == null ? "" : produto.getCodigoBarras());
+        
+        txtPreco.setText(produto.getPreco() == null ? "" : produto.getPreco().toPlainString().replace(".",","));
+        
+        txtEstoqueInicial.setText(String.valueOf(produto.getQuantidade()));
+        
+        comboCategoria.setValue(produto.getCategoria());
+        
+        comboUnidade.setValue(produto.getUnidade());
+        
+        btnSalvarProduto.setText("Atualizar Produto");
+        
+        txtNomeProduto.requestFocus();
+        
     }
 
     private void excluirProduto(Produtos produto) {
 
         Alert confirmacao =
                 new Alert(
-                        Alert.AlertType.CONFIRMATION
+                        AlertType.CONFIRMATION
                 );
 
         confirmacao.setTitle(
@@ -765,81 +760,274 @@ public class ControleProdutos {
             );
         }
     }
-    
+
     // =========================================================
     // CONFIGURAÇÃO DAS UNIDADES
     // =========================================================
-    
+
     private void configurarUnidades() {
-    	
-    	comboUnidade.getItems().setAll(
-    			"UN",
-    			"KG",
-    			"G",
-    			"l",
-    			"ML"
-    			);
+
+        comboUnidade.getItems().setAll(
+                "UN",
+                "KG",
+                "G",
+                "L",
+                "ML"
+        );
     }
-    
+
     // =========================================================
     // CARREGAR CATEGORIAS
     // =========================================================
-    
+
     private void carregarCategorias() {
-    	
-    	comboCategoria.getItems().setAll(
-    			
-    			Conexao.buscarNomesCategorias()
-    			);
+
+        comboCategoria.getItems().setAll(
+                Conexao.buscarNomesCategorias()
+        );
     }
-    
+
     // =========================================================
-    // FUNÇÃO SALVAR PRODUTOS
+    // LIMPAR CAMPOS
     // =========================================================
-    
+
+    private void limparCampos() {
+
+        txtNomeProduto.clear();
+        txtCodBarras.clear();
+        txtPreco.clear();
+        txtEstoqueInicial.clear();
+
+        comboCategoria
+                .getSelectionModel()
+                .clearSelection();
+
+        comboUnidade
+                .getSelectionModel()
+                .clearSelection();
+
+        produtoEmEdicao = null;
+
+        btnSalvarProduto.setText(
+                "Salvar Produto"
+        );
+    }
+
+    // =========================================================
+    // AVISOS
+    // =========================================================
+
+    private void mostrarAviso(
+            String titulo,
+            String mensagem) {
+
+        Alert alerta =
+                new Alert(
+                        AlertType.WARNING
+                );
+
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensagem);
+        alerta.showAndWait();
+    }
+
+    // =========================================================
+    // SALVAR PRODUTO
+    // =========================================================
+
     private void salvarProduto() {
-    	
-    	String nome = txtNomeProduto.getText().strip();
-    	String codigoBarras = txtCodBarras.getText().strip();
-    	String precoTexto = txtPreco.getText().strip();
-    	String estoqueTexto = txtEstoqueInicial.getText().strip();
-    	
-    	String categoriaSelecionada = comboCategoria.getValue();
-    	
-    	String unidadeSelecionada = comboUnidade.getValue();
-    	
-    	// Validação dos campos obrigatórios
-    	if(nome.isEmpty()
-    			|| precoTexto.isEmpty()
-    			|| estoqueTexto.isEmpty()
-    			|| categoriaSelecionada == null
-    			|| unidadeSelecionada == null
-    			) {
-    		Alert alerta = new Alert(
-    				Alert.AlertType.WARNING
-    	    );
-    		
-    		alerta.setTitle("Campos obrigatórios"
-    		);
-    		alerta.setHeaderText("Preencha os campos obrigatórios"
-    		);
-    		alerta.setContentText("Nome, Categoria, Preço, Estoque Inicial" + "e Unidade devem ser preenchidos."
-    		);
-    		
-    		alerta.showAndWait();
-    		return;
-    	}
-    	
-    	try {
-    		
-    		// Aceita 12,90 ou 12.90
-    		BigDecimal preco = new BigDecimal(precoTexto.replace(",",".")
-    				);
-    		
-    	} catch {}
-    	
+
+        String nome =
+                txtNomeProduto
+                        .getText()
+                        .trim();
+
+        String codigoBarras =
+                txtCodBarras
+                        .getText()
+                        .trim();
+
+        String precoTexto =
+                txtPreco
+                        .getText()
+                        .trim();
+
+        String estoqueTexto =
+                txtEstoqueInicial
+                        .getText()
+                        .trim();
+
+        String categoriaSelecionada =
+                comboCategoria.getValue();
+
+        String unidadeSelecionada =
+                comboUnidade.getValue();
+
+        if (nome.isEmpty()
+                || precoTexto.isEmpty()
+                || estoqueTexto.isEmpty()
+                || categoriaSelecionada == null
+                || unidadeSelecionada == null) {
+
+            mostrarAviso(
+                    "Campos obrigatórios",
+                    "Nome, Categoria, Preço, Estoque Inicial "
+                            + "e Unidade devem ser preenchidos."
+            );
+
+            return;
+        }
+
+        try {
+
+            BigDecimal preco =new BigDecimal(precoTexto.replace(",", "."));
+
+            int estoque =Integer.parseInt( estoqueTexto);
+
+            if (preco.compareTo(BigDecimal.ZERO) < 0) {
+
+                mostrarAviso(
+                        "Preço inválido",
+                        "O preço não pode ser negativo."
+                );
+                return;
+            }
+
+            if (estoque < 0) {
+
+                mostrarAviso(
+                        "Estoque inválido",
+                        "O estoque não pode ser negativo."
+                );
+                return;
+            }
+
+            Integer categoriaId =Conexao.buscarIdCategoria(categoriaSelecionada);
+
+            if (categoriaId == null) {
+
+                mostrarAviso(
+                        "Categoria inválida",
+                        "Não foi possível localizar a categoria no banco."
+                );
+                return;
+            }
+
+            boolean editando = produtoEmEdicao != null;
+
+            int idProduto = editando
+                    ? produtoEmEdicao.getId()
+                    : 0;
+
+            String marca = editando
+                    ? produtoEmEdicao.getMarca()
+                    : null;
+
+            int estoqueMinimo = editando
+                    ? produtoEmEdicao.getEstoqueMinimo()
+                    : 5;
+
+            boolean ativo = editando
+                    ? produtoEmEdicao.isAtivo()
+                    : true;
+
+            Produtos produto = new Produtos(
+                    idProduto,
+                    nome,
+                    codigoBarras.isEmpty()
+                            ? null
+                            : codigoBarras,
+                    marca,
+                    preco,
+                    estoque,
+                    estoqueMinimo,
+                    unidadeSelecionada,
+                    ativo,
+                    categoriaId,
+                    categoriaSelecionada
+            );
+
+            boolean sucessoBanco;
+
+            if (editando) {
+
+                sucessoBanco =
+                        Conexao.atualizarProduto(produto);
+
+            } else {
+
+                sucessoBanco =
+                        Conexao.cadastrarProduto(produto);
+            }
+
+            if (sucessoBanco) {
+
+            	Alert sucesso =
+            	        new Alert(
+            	                AlertType.INFORMATION
+            	        );
+
+            	sucesso.setTitle(
+            	        editando
+            	                ? "Produto atualizado"
+            	                : "Produto cadastrado"
+            	);
+
+            	sucesso.setHeaderText(
+            	        editando
+            	                ? "Produto atualizado com sucesso!"
+            	                : "Produto cadastrado com sucesso!"
+            	);
+
+            	sucesso.setContentText(
+            	        nome
+            	                + (editando
+            	                        ? " foi atualizado."
+            	                        : " foi adicionado ao sistema.")
+            	);
+
+            	sucesso.showAndWait();
+
+            	produtoEmEdicao = null;
+
+            	btnSalvarProduto.setText(
+            	        "Salvar Produto"
+            	);
+
+            	limparCampos();
+
+            	definirProdutos(
+            	        Conexao.buscarProdutos()
+            	);
+
+            } else {
+
+                Alert erro =new Alert(AlertType.ERROR);
+
+                erro.setTitle(
+                        "Erro"
+                );
+
+                erro.setHeaderText(
+                        "Não foi possível cadastrar o produto."
+                );
+
+                erro.setContentText(
+                        "Verifique o console para mais detalhes."
+                );
+
+                erro.showAndWait();
+            }
+
+        } catch (NumberFormatException e) {
+
+            mostrarAviso(
+                    "Valor inválido",
+                    "Digite um preço e estoque válidos.\n"
+                            + "Exemplo de preço: 12,90\n"
+                            + "Exemplo de estoque: 10"
+            );
+        }
     }
-    
-    
-    
 }
