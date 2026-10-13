@@ -25,7 +25,7 @@ public class Conexao {
 	
 	private static final String USUARIO = "root";
 	
-	private static final String SENHA = "Aluno";
+	private static final String SENHA = "1206";
 	
 	 public static Connection conectar() {
 	        try {
@@ -629,7 +629,7 @@ public class Conexao {
     			PreparedStatement comando = conexao.prepareStatement(sql)) {
     		
     		comando.setString(1, produto.getNome());
-    		comando.setString(2, produto.getCodigoBArras());
+    		comando.setString(2, produto.getCodigoBarras());
     		comando.setString(3, produto.getMarca());
     		comando.setBigDecimal(4, produto.getPreco());
     		comando.setInt(5, produto.getQuantidade());
@@ -638,12 +638,18 @@ public class Conexao {
     		comando.setBoolean(8, produto.isAtivo());
     		
     		if (produto.getCategoriaId() != null) {
-    			
-    			comando.setNull(9, produto.getCategoriaId());
-    			
+
+    		    comando.setInt(
+    		            9,
+    		            produto.getCategoriaId()
+    		    );
+
     		} else {
-    			comando.setNull(9, java.sql.Types.INTEGER);
-    			
+
+    		    comando.setNull(
+    		            9,
+    		            java.sql.Types.INTEGER
+    		    );
     		}
     		
     		comando.setInt(10, produto.getId());
@@ -653,6 +659,26 @@ public class Conexao {
     		
     	} catch (SQLException e) {
     		System.out.println("Erro ao atualizar produto:");
+    		System.out.println(e.getMessage());
+    		return false;
+    	}
+    }
+    
+    public static boolean excluirProduto(int idProduto) {
+    	
+    	String sql = """
+    			DELETE FROM produtos
+    			WHERE id = ?
+    			""";
+    	
+    	try (Connection conexao = conectar();
+    			PreparedStatement comando = conexao.prepareStatement(sql)) {
+    		
+    		comando.setInt(1, idProduto);
+    		return comando.executeUpdate() > 0;
+    		
+    	} catch (SQLException e) {
+    		System.out.println("Erro ao excluir produto:");
     		System.out.println(e.getMessage());
     		return false;
     	}

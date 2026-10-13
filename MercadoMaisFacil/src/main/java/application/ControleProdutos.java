@@ -1,5 +1,16 @@
 package application;
 
+
+import java.io.IOException;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
@@ -569,61 +580,46 @@ public class ControleProdutos {
     // AÇÕES DA TABELA
     // =========================================================
 
-    private void visualizarProduto(Produtos produto) {
 
-        Alert alerta =
-                new Alert(
-                        AlertType.INFORMATION
-                );
+private void visualizarProduto(Produtos produto) {
 
-        alerta.setTitle(
-                "Visualizar Produto"
+    try {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource(
+                        "/application/detalhesproduto.fxml"
+                )
         );
 
-        alerta.setHeaderText(
-                produto.getNome()
-        );
+        Parent root = loader.load();
 
-        alerta.setContentText(
-                "Código: "
-                        + produto.getId()
+        ControleDetalhesProduto controle =
+                loader.getController();
 
-                        + "\nCódigo de barras: "
-                        + textoOuPadrao(
-                                produto.getCodigoBarras(),
-                                "-"
-                        )
+        controle.setProduto(produto);
 
-                        + "\nCategoria: "
-                        + textoOuPadrao(
-                                produto.getCategoria(),
-                                "Sem categoria"
-                        )
+        Stage janela = new Stage();
 
-                        + "\nMarca: "
-                        + textoOuPadrao(
-                                produto.getMarca(),
-                                "-"
-                        )
+        janela.initModality(Modality.APPLICATION_MODAL);
+        janela.initStyle(StageStyle.TRANSPARENT);
 
-                        + "\nPreço: "
-                        + formatarPreco(produto)
+        Scene cena = new Scene(root);
+        cena.setFill(Color.TRANSPARENT);
 
-                        + "\nEstoque: "
-                        + produto.getQuantidade()
+        janela.setTitle("Detalhes do Produto");
+        janela.setScene(cena);
+        janela.setResizable(false);
+        janela.showAndWait();
 
-                        + "\nUnidade: "
-                        + textoOuPadrao(
-                                produto.getUnidade(),
-                                "-"
-                        )
+    } catch (IOException e) {
+        e.printStackTrace();
 
-                        + "\nStatus: "
-                        + produto.getStatus()
-        );
-
-        alerta.showAndWait();
+        new Alert(
+                Alert.AlertType.ERROR,
+                "Não foi possível abrir os detalhes do produto."
+        ).showAndWait();
     }
+}
+
 
     private void editarProduto(Produtos produto) {
 
@@ -648,42 +644,37 @@ public class ControleProdutos {
     }
 
     private void excluirProduto(Produtos produto) {
-
-        Alert confirmacao =
-                new Alert(
-                        AlertType.CONFIRMATION
-                );
-
-        confirmacao.setTitle(
-                "Excluir Produto"
-        );
-
-        confirmacao.setHeaderText(
-                "Deseja excluir "
-                        + produto.getNome()
-                        + "?"
-        );
-
-        confirmacao.setContentText(
-                "Por enquanto esta ação remove "
-                        + "o produto somente da lista da tela.\n"
-                        + "Depois vamos ligar a exclusão "
-                        + "ao MySQL."
-        );
-
-        confirmacao
-                .showAndWait()
-                .ifPresent(resposta -> {
-
-                    if (resposta == ButtonType.OK) {
-
-                        todosProdutos.remove(
-                                produto
-                        );
-
-                        atualizarPaginacao();
-                    }
-                });
+    	
+    	Alert confirmacao = new Alert(AlertType.CONFIRMATION);
+    	
+    	confirmacao.setTitle("Excluir Produto");
+    	confirmacao.setHeaderText("Deseja excluir " + produto.getNome() + "?");
+    	confirmacao.setContentText("Esta ação removerá o produto do banco de dados.");
+    	confirmacao.showAndWait().ifPresent(resposta -> {
+    		
+    		if(resposta == ButtonType.OK) {
+    			boolean excluido = Conexao.excluirProduto(produto.getId());
+    			
+    			if(excluido) {
+    				Alert sucesso = new Alert(AlertType.INFORMATION);
+    				
+    				sucesso.setTitle("Produto excluído");
+    				sucesso.setHeaderText("Produto excluído com sucesso!");
+    				sucesso.setContentText(produto.getNome() + " foi removido do sistema.");
+    				sucesso.showAndWait();
+    				
+    				definirProdutos(Conexao.buscarProdutos());
+    			} else {
+    				Alert erro = new Alert(AlertType.ERROR);
+    				erro.setTitle("Não foi possíveç excluir");
+    				erro.setHeaderText("O produto não pôde ser excluído.");
+    				erro.setContentText("Se este produto já estover associado "
+    									+ "a uma venda, ele não pode ser apagado "
+    									+ "para preservar o histórico.");
+    				erro.showAndWait();
+    			}
+    		}
+    	});
     }
 
     // =========================================================
