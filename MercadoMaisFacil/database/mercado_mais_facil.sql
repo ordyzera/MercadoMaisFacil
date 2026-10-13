@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `mercado_mais_facil` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `mercado_mais_facil`;
 -- MySQL dump 10.13  Distrib 8.0.46, for Win64 (x86_64)
 --
 -- Host: localhost    Database: mercado_mais_facil
@@ -109,14 +107,18 @@ DROP TABLE IF EXISTS `produtos`;
 CREATE TABLE `produtos` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
+  `codigo_barras` varchar(30) DEFAULT NULL,
+  `marca` varchar(100) DEFAULT NULL,
   `preco` decimal(10,2) NOT NULL,
   `quantidade` int NOT NULL,
   `estoque_minimo` int NOT NULL,
+  `unidade` varchar(20) NOT NULL DEFAULT 'UN',
+  `ativo` tinyint(1) NOT NULL DEFAULT '1',
   `categoria_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_produto_categoria` (`categoria_id`),
   CONSTRAINT `fk_produto_categoria` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +127,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (1,'Arroz 5kg',24.50,3,5,1),(2,'Feijão 1kg',8.99,10,3,1),(3,'Coca-Cola 2L',12.90,15,5,2);
+INSERT INTO `produtos` VALUES (1,'Arroz 5kg',NULL,NULL,24.50,10,5,'UN',1,1),(2,'Feijão 1kg',NULL,NULL,8.99,10,3,'UN',1,1),(3,'Coca-Cola 2L',NULL,NULL,12.90,15,5,'UN',1,2),(5,'Oleo de Girasol 1L','12435678980003',NULL,14.90,10,5,'UN',1,1);
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +142,10 @@ CREATE TABLE `vendas` (
   `id` int NOT NULL AUTO_INCREMENT,
   `valor_total` decimal(10,2) NOT NULL,
   `data_venda` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  `cliente_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_venda_cliente` (`cliente_id`),
+  CONSTRAINT `fk_venda_cliente` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -150,7 +155,7 @@ CREATE TABLE `vendas` (
 
 LOCK TABLES `vendas` WRITE;
 /*!40000 ALTER TABLE `vendas` DISABLE KEYS */;
-INSERT INTO `vendas` VALUES (1,120.50,'2026-09-23 12:57:08'),(2,89.90,'2026-09-23 12:57:08'),(3,250.00,'2026-09-23 12:57:08'),(4,180.00,'2026-09-22 13:20:57');
+INSERT INTO `vendas` VALUES (1,120.50,'2026-09-23 12:57:08',1),(2,89.90,'2026-09-23 12:57:08',2),(3,250.00,'2026-09-23 12:57:08',3),(4,180.00,'2026-09-22 13:20:57',1);
 /*!40000 ALTER TABLE `vendas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -163,4 +168,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-09-23 16:54:31
+-- Dump completed on 2026-10-13 20:22:01

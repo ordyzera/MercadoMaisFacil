@@ -25,7 +25,7 @@ public class Conexao {
 	
 	private static final String USUARIO = "root";
 	
-	private static final String SENHA = "1206";
+	private static final String SENHA = "Aluno";
 	
 	 public static Connection conectar() {
 	        try {

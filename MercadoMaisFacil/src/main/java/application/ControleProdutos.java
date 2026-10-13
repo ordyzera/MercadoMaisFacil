@@ -596,6 +596,7 @@ private void visualizarProduto(Produtos produto) {
                 loader.getController();
 
         controle.setProduto(produto);
+        controle.setAcaoEditar(this::editarProduto);
 
         Stage janela = new Stage();
 
