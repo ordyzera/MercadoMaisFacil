@@ -1,5 +1,6 @@
 package application;
 
+import java.text.Normalizer;
 
 import java.io.IOException;
 
@@ -96,10 +97,10 @@ public class ControleProdutos {
     // =========================================================
 
     @FXML
-    private ComboBox<?> comboAllCategorias;
+    private ComboBox<String> comboTodasCategorias;
 
     @FXML
-    private ComboBox<?> comboAllStatus;
+    private ComboBox<String> comboTodosStatus;
 
     @FXML
     private ComboBox<String> comboUnidade;
@@ -168,8 +169,9 @@ public class ControleProdutos {
     // DADOS
     // =========================================================
 
-    private final ObservableList<Produtos> todosProdutos =
-            FXCollections.observableArrayList();
+    private final ObservableList<Produtos> todosProdutos = FXCollections.observableArrayList();
+            
+    private final  ObservableList<Produtos> produtosFiltrados = FXCollections.observableArrayList();
 
     private Timeline relogio;
     
@@ -188,6 +190,7 @@ public class ControleProdutos {
         configurarColunas();
         configurarColunaAcoes();
         configurarPaginacao();
+        configurarFiltros();
 
         atualizarDataHora();
         iniciarRelogio();
@@ -414,34 +417,21 @@ public class ControleProdutos {
 
     private void atualizarPaginacao() {
 
-        int totalProdutos =
-                todosProdutos.size();
+    	int totalProdutos = produtosFiltrados.size();
 
-        int totalPaginas =
-                Math.max(
+        int totalPaginas = Math.max(
                         1,
-                        (int) Math.ceil(
-                                (double) totalProdutos
-                                        / PRODUTOS_POR_PAGINA
-                        )
-                );
+                        (int) Math.ceil((double) totalProdutos/ PRODUTOS_POR_PAGINA));
 
-        paginacaoProdutos.setPageCount(
-                totalPaginas
-        );
+        paginacaoProdutos.setPageCount(totalPaginas);
 
-        int paginaAtual =
-                paginacaoProdutos
-                        .getCurrentPageIndex();
+        int paginaAtual = paginacaoProdutos.getCurrentPageIndex();
 
         if (paginaAtual >= totalPaginas) {
 
             paginaAtual = totalPaginas - 1;
 
-            paginacaoProdutos
-                    .setCurrentPageIndex(
-                            paginaAtual
-                    );
+            paginacaoProdutos.setCurrentPageIndex(paginaAtual);
         }
 
         atualizarPagina(paginaAtual);
@@ -450,22 +440,16 @@ public class ControleProdutos {
 
     private void atualizarPagina(int indicePagina) {
 
-        int totalProdutos =
-                todosProdutos.size();
+    	int totalProdutos = produtosFiltrados.size();
 
         if (totalProdutos == 0) {
 
-            tableProdutos.setItems(
-                    FXCollections.observableArrayList()
-            );
+            tableProdutos.setItems(FXCollections.observableArrayList());
 
-            lblMostrandoProdutos.setText(
-                    "Mostrando 0 de 0 produtos"
-            );
+            lblMostrandoProdutos.setText("Mostrando 0 de 0 produtos");
 
             paginacaoProdutos.setVisible(false);
             paginacaoProdutos.setManaged(false);
-
             return;
         }
 
@@ -484,10 +468,10 @@ public class ControleProdutos {
 
         ObservableList<Produtos> produtosDaPagina =
                 FXCollections.observableArrayList(
-                        todosProdutos.subList(
-                                inicio,
-                                fim
-                        )
+                		produtosFiltrados.subList(
+                		        inicio,
+                		        fim
+                		)
                 );
 
         tableProdutos.setItems(
@@ -533,23 +517,115 @@ public class ControleProdutos {
         );
 
         if (lblTotalProdutosLista != null) {
-            lblTotalProdutosLista.setText(
-                    String.valueOf(totalProdutos)
-            );
+        	lblTotalProdutosLista.setText(String.valueOf(produtosFiltrados.size()));
         }
 
-        lblProdutosAtivos.setText(
-                String.valueOf(produtosAtivos)
-        );
+        lblProdutosAtivos.setText(String.valueOf(produtosAtivos));
 
-        lblEstoqueBaixo.setText(
-                String.valueOf(estoqueBaixo)
-        );
+        lblEstoqueBaixo.setText(String.valueOf(estoqueBaixo));
 
-        lblCategorias.setText(
-                String.valueOf(totalCategorias)
-        );
+        lblCategorias.setText(String.valueOf(totalCategorias));
     }
+    
+
+private void configurarFiltros() {
+
+    // Filtro de categorias
+    comboTodasCategorias.getItems().setAll("Todas as categorias");
+    comboTodasCategorias.getItems().addAll(
+    comboCategoria.getItems()
+    );
+    comboTodasCategorias.setValue("Todas as categorias");
+
+    // Filtro de status e estoque
+    comboTodosStatus.getItems().setAll(
+            "Todos os status",
+            "Ativos",
+            "Inativos",
+            "Estoque baixo"
+    );
+    comboTodosStatus.setValue("Todos os status");
+
+    // Pesquisa por texto
+    txtPesquisarProdutos.textProperty().addListener((observable, anterior, atual) -> aplicarFiltros());
+
+    // Alteração da categoria
+    comboTodasCategorias.valueProperty().addListener((observable, anterior, atual) -> aplicarFiltros());
+
+    // Alteração do status
+    comboTodosStatus.valueProperty().addListener((observable, anterior, atual) -> aplicarFiltros());
+}
+
+    
+    private void aplicarFiltros() {
+
+        String pesquisa = normalizar(txtPesquisarProdutos.getText());
+        String categoriaSelecionada = comboTodasCategorias.getValue();
+        String statusSelecionado = comboTodosStatus.getValue();
+
+        List<Produtos> filtrados = todosProdutos.stream()
+
+                // Pesquisa por nome, código, marca ou categoria
+                .filter(produto -> pesquisa.isEmpty()
+                        || normalizar(produto.getNome()).contains(pesquisa)
+                        || normalizar(produto.getCodigoBarras()).contains(pesquisa)
+                        || normalizar(produto.getMarca()).contains(pesquisa)
+                        || normalizar(produto.getCategoria()).contains(pesquisa)
+                        || String.valueOf(produto.getId()).contains(pesquisa)
+                )
+
+                // Filtro de categoria
+                .filter(produto -> categoriaSelecionada == null
+                        || categoriaSelecionada.equals("Todas as categorias")
+                        || categoriaSelecionada.equals(produto.getCategoria())
+                )
+
+                // Filtro de status e estoque baixo
+                .filter(produto -> {
+
+                    if (statusSelecionado == null
+                            || statusSelecionado.equals("Todos os status")) {
+                        return true;
+                    }
+
+                    switch (statusSelecionado) {
+
+                        case "Ativos":
+                            return produto.isAtivo();
+
+                        case "Inativos":
+                            return !produto.isAtivo();
+
+                        case "Estoque baixo":
+                            return produto.getQuantidade()
+                                    <= produto.getEstoqueMinimo();
+
+                        default:
+                            return true;
+                    }
+                })
+
+                .toList();
+
+        produtosFiltrados.setAll(filtrados);
+
+        // Volta para a primeira página quando os filtros mudam
+        paginacaoProdutos.setCurrentPageIndex(0);
+
+        atualizarPaginacao();
+    }
+    
+    private String normalizar(String texto) {
+
+        if (texto == null) {
+            return "";
+        }
+
+        return Normalizer.normalize(
+                texto.trim().toLowerCase(Locale.ROOT),
+                Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+    }
+
 
     // =========================================================
     // RECEBE PRODUTOS DO BANCO
@@ -559,10 +635,7 @@ public class ControleProdutos {
 
         todosProdutos.setAll(produtos);
 
-        paginacaoProdutos
-                .setCurrentPageIndex(0);
-
-        atualizarPaginacao();
+        aplicarFiltros();
     }
 
     public void adicionarProduto(Produtos produto) {
@@ -573,7 +646,7 @@ public class ControleProdutos {
 
         todosProdutos.add(produto);
 
-        atualizarPaginacao();
+        aplicarFiltros();
     }
 
     // =========================================================
@@ -585,15 +658,11 @@ private void visualizarProduto(Produtos produto) {
 
     try {
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource(
-                        "/application/detalhesproduto.fxml"
-                )
-        );
+                getClass().getResource("/application/detalhesproduto.fxml"));
 
         Parent root = loader.load();
 
-        ControleDetalhesProduto controle =
-                loader.getController();
+        ControleDetalhesProduto controle = loader.getController();
 
         controle.setProduto(produto);
         controle.setAcaoEditar(this::editarProduto);
@@ -614,10 +683,7 @@ private void visualizarProduto(Produtos produto) {
     } catch (IOException e) {
         e.printStackTrace();
 
-        new Alert(
-                Alert.AlertType.ERROR,
-                "Não foi possível abrir os detalhes do produto."
-        ).showAndWait();
+        new Alert(Alert.AlertType.ERROR,"Não foi possível abrir os detalhes do produto.").showAndWait();
     }
 }
 
@@ -657,6 +723,7 @@ private void visualizarProduto(Produtos produto) {
     			boolean excluido = Conexao.excluirProduto(produto.getId());
     			
     			if(excluido) {
+    				
     				Alert sucesso = new Alert(AlertType.INFORMATION);
     				
     				sucesso.setTitle("Produto excluído");

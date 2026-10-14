@@ -483,11 +483,11 @@
 
 
 
-            <ComboBox fx:id="comboAllStatus" layoutX="563.0" layoutY="60.0" prefHeight="35.0" prefWidth="150.0" promptText="Todos os Status" style="-fx-background-color: #0B2A52; -fx-background-radius: 5px; -fx-border-color: #3F648D; -fx-border-radius: 5px; -fx-base: #0B2A52;" />
+            <ComboBox fx:id="comboTodosStatus" layoutX="563.0" layoutY="60.0" prefHeight="35.0" prefWidth="150.0" promptText="Todos os Status" style="-fx-background-color: #0B2A52; -fx-background-radius: 5px; -fx-border-color: #3F648D; -fx-border-radius: 5px; -fx-base: #0B2A52;" />
 
 
 
-            <ComboBox fx:id="comboAllCategorias" layoutX="400.0" layoutY="60.0" prefHeight="35.0" prefWidth="150.0" promptText="Todos as Categorias" style="-fx-background-color: #0B2A52; -fx-background-radius: 5px; -fx-border-color: #3F648D; -fx-border-radius: 5px; -fx-base: #0B2A52;" />
+            <ComboBox fx:id="comboTodasCategorias" layoutX="400.0" layoutY="60.0" prefHeight="35.0" prefWidth="150.0" promptText="Todas as Categorias" style="-fx-background-color: #0B2A52; -fx-background-radius: 5px; -fx-border-color: #3F648D; -fx-border-radius: 5px; -fx-base: #0B2A52;" />
 
 
 
