@@ -1,19 +1,24 @@
 package application;
 
-import java.text.Normalizer;
-
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.charset.StandardCharsets;
+
+import javafx.stage.FileChooser;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.text.Normalizer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -200,6 +205,8 @@ public class ControleProdutos {
 
         btnSalvarProduto.setOnAction(evento -> salvarProduto());
         btnLimparCampos.setOnAction(evento -> limparCampos());
+        btnExportar.setOnAction(evento -> exportarProdutos());
+        btnImportar.setOnAction(evento -> importarProdutos());
     }
 
     // =========================================================
@@ -241,41 +248,101 @@ public class ControleProdutos {
                 )
         );
 
+        // ==========================================
+        // NOVA COLUNA ESTOQUE COM CORES DINÂMICAS
+        // ==========================================
         colEstoque.setCellValueFactory(dados ->
                 new SimpleStringProperty(
-                        String.valueOf(
-                                dados.getValue().getQuantidade()
-                        )
+                        String.valueOf(dados.getValue().getQuantidade())
                 )
         );
-
+        
+        colEstoque.setCellFactory(coluna -> new TableCell<Produtos, String>() {
+            @Override
+            protected void updateItem(String item, boolean vazio) {
+                super.updateItem(item, vazio);
+        
+                if (vazio || item == null) {
+                    setText(null);
+                    setStyle(""); 
+                } else {
+                    setText(item);
+                    
+                    Produtos produto = getTableRow().getItem();
+                    
+                    if (produto != null) {
+                        int estoqueAtual = produto.getQuantidade();
+                        int estoqueMinimo = produto.getEstoqueMinimo();
+                        
+                        String estilo = "-fx-alignment: CENTER;";
+        
+                        if (estoqueAtual <= 0) {
+                            estilo += "-fx-text-fill: #E74C3C; -fx-font-weight: bold;";
+                        } else if (estoqueAtual <= estoqueMinimo) {
+                            estilo += "-fx-text-fill: #F1C40F; -fx-font-weight: bold;";
+                        } else {
+                            estilo += "-fx-text-fill: white;"; 
+                        }
+                        
+                        setStyle(estilo);
+                    }
+                }
+            }
+        });
+        
+        // ==========================================
+        // COLUNA STATUS COM BOLINHA VERDE/VERMELHA
+        // ==========================================
         colStatus.setCellValueFactory(dados ->
                 new SimpleStringProperty(
                         dados.getValue().getStatus()
                 )
         );
+
+        colStatus.setCellFactory(coluna -> new TableCell<Produtos, String>() {
+            @Override
+            protected void updateItem(String item, boolean vazio) {
+                super.updateItem(item, vazio);
+
+                if (vazio || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    setText(item);
+
+                    Circle bolinha = new Circle(4);
+
+                    if (item.equals("Ativo")) {
+                        bolinha.setFill(Color.web("#2ECC71")); 
+                    } else {
+                        bolinha.setFill(Color.web("#E74C3C")); 
+                    }
+
+                    setGraphic(bolinha);
+                    setGraphicTextGap(8); 
+                    setStyle("-fx-alignment: CENTER; -fx-text-fill: white;");
+                }
+            }
+        });
     }
 
-    private String textoOuPadrao(String texto, String padrao) {
+    // =========================================================
+    // MÉTODOS AUXILIARES RESTAURADOS
+    // =========================================================
 
+    private String textoOuPadrao(String texto, String padrao) {
         if (texto == null || texto.isBlank()) {
             return padrao;
         }
-
         return texto;
     }
 
     private String formatarPreco(Produtos produto) {
-
         if (produto.getPreco() == null) {
             return "R$ 0,00";
         }
 
-        NumberFormat moeda =
-                NumberFormat.getCurrencyInstance(
-                        new Locale("pt", "BR")
-                );
-
+        NumberFormat moeda = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         return moeda.format(produto.getPreco());
     }
 
@@ -528,33 +595,33 @@ public class ControleProdutos {
     }
     
 
-private void configurarFiltros() {
+    private void configurarFiltros() {
 
-    // Filtro de categorias
-    comboTodasCategorias.getItems().setAll("Todas as categorias");
-    comboTodasCategorias.getItems().addAll(
-    comboCategoria.getItems()
-    );
-    comboTodasCategorias.setValue("Todas as categorias");
+        // Filtro de categorias
+        comboTodasCategorias.getItems().setAll("Todas as categorias");
+        comboTodasCategorias.getItems().addAll(
+        comboCategoria.getItems()
+        );
+        comboTodasCategorias.setValue("Todas as categorias");
 
-    // Filtro de status e estoque
-    comboTodosStatus.getItems().setAll(
-            "Todos os status",
-            "Ativos",
-            "Inativos",
-            "Estoque baixo"
-    );
-    comboTodosStatus.setValue("Todos os status");
+        // Filtro de status e estoque
+        comboTodosStatus.getItems().setAll(
+                "Todos os status",
+                "Ativos",
+                "Inativos",
+                "Estoque baixo"
+        );
+        comboTodosStatus.setValue("Todos os status");
 
-    // Pesquisa por texto
-    txtPesquisarProdutos.textProperty().addListener((observable, anterior, atual) -> aplicarFiltros());
+        // Pesquisa por texto
+        txtPesquisarProdutos.textProperty().addListener((observable, anterior, atual) -> aplicarFiltros());
 
-    // Alteração da categoria
-    comboTodasCategorias.valueProperty().addListener((observable, anterior, atual) -> aplicarFiltros());
+        // Alteração da categoria
+        comboTodasCategorias.valueProperty().addListener((observable, anterior, atual) -> aplicarFiltros());
 
-    // Alteração do status
-    comboTodosStatus.valueProperty().addListener((observable, anterior, atual) -> aplicarFiltros());
-}
+        // Alteração do status
+        comboTodosStatus.valueProperty().addListener((observable, anterior, atual) -> aplicarFiltros());
+    }
 
     
     private void aplicarFiltros() {
@@ -648,44 +715,265 @@ private void configurarFiltros() {
 
         aplicarFiltros();
     }
+    
+    // =========================================================
+    // EXPORTAR PRODUTOS
+    // =========================================================
+    
+    private void exportarProdutos() {
+    	
+    	if (produtosFiltrados.isEmpty()) {
+    		mostrarAviso(
+    				"Nenhum produto",
+    				"Não existem produtos na lista atual para exportar."
+    				);
+    		return;
+    	}
+    	
+    	FileChooser seletor = new FileChooser();
+    	seletor.setTitle("Exportar produtos");
+    	seletor.setInitialFileName("produtos_mercado_mais_facil.csv");
+    	seletor.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivo CSV (*.csv)", "*.csv"));
+    	
+    	File arquivo = seletor.showSaveDialog(btnExportar.getScene().getWindow());
+    	
+    	if (arquivo == null) {
+    		return;
+    		
+    	}
+    	
+    	StringBuilder conteudo = new StringBuilder("\uFEFF");
+    	
+    	conteudo.append("ID;Nome;Código de barras;Categoria;Marca;Preço;Quantidade;Estoque mínimo;Unidade;Status").append(System.lineSeparator());
+    	
+    	for (Produtos produto : produtosFiltrados) {
+    		
+    		conteudo.append(valorCsv(String.valueOf(produto.getId())))
+		            .append(';')
+		            .append(valorCsv(produto.getNome()))
+		            .append(';')
+		            .append(valorCsv(produto.getCodigoBarras()))
+		            .append(';')
+		            .append(valorCsv(produto.getCategoria()))
+		            .append(';')
+		            .append(valorCsv(produto.getMarca()))
+		            .append(';')
+		            .append(valorCsv(produto.getPreco() == null ? "" : produto.getPreco().toPlainString()))
+		            .append(';')
+		            .append(valorCsv(String.valueOf(produto.getQuantidade())))
+		            .append(';')
+		            .append(valorCsv(String.valueOf(produto.getEstoqueMinimo())))
+		            .append(';')
+		            .append(valorCsv(produto.getUnidade()))
+		            .append(';')
+		            .append(valorCsv(produto.getStatus()))
+		            .append(System.lineSeparator());
+    	}
+    	
+    	try {
+    		Files.writeString(arquivo.toPath(), conteudo.toString(), StandardCharsets.UTF_8);
+    		
+    		Alert sucesso = new Alert(AlertType.INFORMATION);
+            sucesso.setTitle("Exportação concluída");
+            sucesso.setHeaderText("Produtos exportados com sucesso!");
+            sucesso.setContentText("Arquivo salvo em:\n" + arquivo.getAbsolutePath());
+            sucesso.showAndWait();
+            
+    	} catch (IOException e) {
+            e.printStackTrace();
+
+            Alert erro = new Alert(AlertType.ERROR);
+            erro.setTitle("Erro na exportação");
+            erro.setHeaderText("Não foi possível exportar os produtos.");
+            erro.setContentText(e.getMessage());
+            erro.showAndWait();
+        }
+    }
+    
+    private String valorCsv(String valor) {
+
+        if (valor == null) {
+            valor = "";
+        }
+
+        return "\"" + valor.replace("\"", "\"\"") + "\"";
+    }
+    
+    // =========================================================
+    // IMPORTAR PRODUTOS
+    // =========================================================
+    
+    private void importarProdutos() {
+
+        FileChooser seletor = new FileChooser();
+        seletor.setTitle("Importar produtos");
+        seletor.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivo CSV (*.csv)", "*.csv"));
+
+        File arquivo = seletor.showOpenDialog(btnImportar.getScene().getWindow());
+
+        if (arquivo == null) {
+            return;
+        }
+
+        int importados = 0;
+        int duplicados = 0;
+        int erros = 0;
+
+        try {
+            List<String> linhas = Files.readAllLines(arquivo.toPath(), StandardCharsets.UTF_8);
+            boolean primeiraLinha = true;
+
+            for (String linha : linhas) {
+                // Remove o caractere invisível BOM (\uFEFF) se existir no início do ficheiro
+                if (primeiraLinha && linha.startsWith("\uFEFF")) {
+                    linha = linha.substring(1);
+                }
+
+                // Pula o cabeçalho
+                if (primeiraLinha && linha.toLowerCase().contains("nome")) {
+                    primeiraLinha = false;
+                    continue;
+                }
+                primeiraLinha = false;
+
+                if (linha.trim().isEmpty()) continue;
+
+                // Divide por ponto e vírgula, ignorando os que estiverem dentro de aspas
+                String[] dados = linha.split(";(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+
+                if (dados.length < 9) {
+                    erros++;
+                    continue;
+                }
+
+                String nome = limparValorCsv(dados[1]);
+                String codigoBarras = limparValorCsv(dados[2]);
+                String categoriaNome = limparValorCsv(dados[3]);
+                String marca = limparValorCsv(dados[4]);
+                String precoStr = limparValorCsv(dados[5]).replace(",", ".");
+                String quantidadeStr = limparValorCsv(dados[6]);
+                String estoqueMinimoStr = limparValorCsv(dados[7]);
+                String unidade = limparValorCsv(dados[8]);
+                String status = dados.length > 9 ? limparValorCsv(dados[9]) : "Ativo";
+
+                // ==========================================
+                // VERIFICAÇÃO DE DUPLICIDADE EM MEMÓRIA
+                // ==========================================
+                boolean jaExiste = todosProdutos.stream().anyMatch(p -> 
+                    p.getNome().equalsIgnoreCase(nome) || 
+                    (!codigoBarras.isEmpty() && codigoBarras.equals(p.getCodigoBarras()))
+                );
+
+                if (jaExiste) {
+                    duplicados++;
+                    continue;
+                }
+
+                // Conversões de números
+                BigDecimal preco = precoStr.isEmpty() ? BigDecimal.ZERO : new BigDecimal(precoStr);
+                int quantidade = quantidadeStr.isEmpty() ? 0 : Integer.parseInt(quantidadeStr);
+                int estoqueMinimo = estoqueMinimoStr.isEmpty() ? 5 : Integer.parseInt(estoqueMinimoStr);
+                boolean ativo = status.equalsIgnoreCase("Ativo");
+
+                // ==========================================
+                // VERIFICAÇÃO DA CATEGORIA
+                // ==========================================
+                Integer categoriaId = null;
+                if (!categoriaNome.isEmpty()) {
+                    categoriaId = Conexao.buscarIdCategoria(categoriaNome);
+                }
+
+                Produtos novoProduto = new Produtos(
+                        0, // ID gerado pelo MySQL
+                        nome,
+                        codigoBarras.isEmpty() ? null : codigoBarras,
+                        marca.isEmpty() ? null : marca,
+                        preco,
+                        quantidade,
+                        estoqueMinimo,
+                        unidade.isEmpty() ? "UN" : unidade,
+                        ativo,
+                        categoriaId,
+                        categoriaNome
+                );
+
+                // Salva no banco de dados
+                if (Conexao.cadastrarProduto(novoProduto)) {
+                    importados++;
+                } else {
+                    erros++;
+                }
+            }
+
+            Alert resultado = new Alert(AlertType.INFORMATION);
+            resultado.setTitle("Importação Concluída");
+            resultado.setHeaderText("Resumo da importação");
+            resultado.setContentText(
+                    "Produtos importados com sucesso: " + importados + "\n" +
+                    "Produtos duplicados (ignorados): " + duplicados + "\n" +
+                    "Erros de formatação/salvamento: " + erros
+            );
+            resultado.showAndWait();
+
+            // Atualiza a tabela na tela se novos itens foram adicionados
+            if (importados > 0) {
+                definirProdutos(Conexao.buscarProdutos());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            mostrarAviso("Erro na importação", "Ocorreu um erro ao ler o arquivo:\n" + e.getMessage());
+        }
+    }
+
+    private String limparValorCsv(String valor) {
+        if (valor == null) return "";
+        valor = valor.trim();
+        // Remove as aspas do início e fim colocadas na exportação
+        if (valor.startsWith("\"") && valor.endsWith("\"") && valor.length() >= 2) {
+            valor = valor.substring(1, valor.length() - 1);
+        }
+        // Desfaz o escape de aspas duplas ("" volta a ser ")
+        return valor.replace("\"\"", "\"");
+    }
 
     // =========================================================
     // AÇÕES DA TABELA
     // =========================================================
 
 
-private void visualizarProduto(Produtos produto) {
+    private void visualizarProduto(Produtos produto) {
 
-    try {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/application/detalhesproduto.fxml"));
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/application/detalhesproduto.fxml"));
 
-        Parent root = loader.load();
+            Parent root = loader.load();
 
-        ControleDetalhesProduto controle = loader.getController();
+            ControleDetalhesProduto controle = loader.getController();
 
-        controle.setProduto(produto);
-        controle.setAcaoEditar(this::editarProduto);
+            controle.setProduto(produto);
+            controle.setAcaoEditar(this::editarProduto);
 
-        Stage janela = new Stage();
+            Stage janela = new Stage();
 
-        janela.initModality(Modality.APPLICATION_MODAL);
-        janela.initStyle(StageStyle.TRANSPARENT);
+            janela.initModality(Modality.APPLICATION_MODAL);
+            janela.initStyle(StageStyle.TRANSPARENT);
 
-        Scene cena = new Scene(root);
-        cena.setFill(Color.TRANSPARENT);
+            Scene cena = new Scene(root);
+            cena.setFill(Color.TRANSPARENT);
 
-        janela.setTitle("Detalhes do Produto");
-        janela.setScene(cena);
-        janela.setResizable(false);
-        janela.showAndWait();
+            janela.setTitle("Detalhes do Produto");
+            janela.setScene(cena);
+            janela.setResizable(false);
+            janela.showAndWait();
 
-    } catch (IOException e) {
-        e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
 
-        new Alert(Alert.AlertType.ERROR,"Não foi possível abrir os detalhes do produto.").showAndWait();
+            new Alert(Alert.AlertType.ERROR,"Não foi possível abrir os detalhes do produto.").showAndWait();
+        }
     }
-}
 
 
     private void editarProduto(Produtos produto) {
