@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="950.0" prefWidth="1530.0" style="-fx-background-color: #0F172A;" stylesheets="@produtos.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControleCategorias">
+    <children>
+
+      <!-- CABEÇALHO -->
+      <AnchorPane layoutX="18.0" layoutY="10.0" prefHeight="60.0" prefWidth="1492.0">
+         <children>
+            <Label layoutX="70.0" layoutY="6.0" text="Categorias" textFill="#F8FAFC">
+               <font><Font name="Arial Bold" size="22.0" /></font>
+            </Label>
+            <Label layoutX="70.0" layoutY="38.0" text="Gerencie e organize as categorias dos produtos do seu mercadinho." textFill="#94A3B8">
+               <font><Font name="Arial" size="11.5" /></font>
+            </Label>
+            
+            <AnchorPane layoutX="1217.0" layoutY="1.0" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #1E293B; -fx-background-radius: 10px; -fx-border-color: #334155; -fx-border-radius: 10px; -fx-border-width: 1px;">
+               <children>
+                  <Label fx:id="lblDataAtual" layoutX="50.0" layoutY="9.0" prefWidth="210.0" text="Hoje é 28 de setembro de 2026" textFill="#F8FAFC">
+                     <font><Font name="Arial Bold" size="11.0" /></font>
+                  </Label>
+                  <Label fx:id="lblDiaSemana" layoutX="50.0" layoutY="32.0" prefWidth="210.0" text="Segunda-feira, 18:30" textFill="#94A3B8">
+                     <font><Font name="Arial" size="10.0" /></font>
+                  </Label>
+                  <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/calendar_month_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="60.0" fitWidth="55.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/dashboard_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+
+      <!-- MINI CARDS -->
+      <AnchorPane layoutX="18.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #1E293B; -fx-background-radius: 10px; -fx-border-color: #334155; -fx-border-radius: 10px;">
+         <children>
+            <Label layoutX="120.0" layoutY="30.0" text="Total de Categorias" textFill="#94A3B8"><font><Font name="Arial" size="15.0" /></font></Label>
+            <Label fx:id="lblTotalCategorias" layoutX="130.0" layoutY="55.0" text="0" textFill="#F8FAFC"><font><Font name="Arial Bold" size="25.0" /></font></Label>
+            <Label layoutX="120.0" layoutY="100.0" text="↑ +12%" textFill="#10B981"><font><Font name="Arial Bold" size="12.0" /></font></Label>
+            <Label layoutX="175.0" layoutY="100.0" text="em relação ao mês anterior" textFill="#94A3B8"><font><Font name="Arial" size="12.0" /></font></Label>
+            <Circle layoutX="60.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.21176470816135406" green="0.12156862765550613" blue="0.5098039507865906" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.27843138575553894" blue="0.9607843160629272" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Circle>
+            <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="40.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/grid_view_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+
+      <AnchorPane layoutX="395.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #1E293B; -fx-background-radius: 10px; -fx-border-color: #334155; -fx-border-radius: 10px;">
+         <children>
+            <Label layoutX="120.0" layoutY="30.0" text="Categorias Ativas" textFill="#94A3B8"><font><Font name="Arial" size="15.0" /></font></Label>
+            <Label fx:id="lblCategoriasAtivas" layoutX="130.0" layoutY="55.0" text="0" textFill="#F8FAFC"><font><Font name="Arial Bold" size="25.0" /></font></Label>
+            <Label layoutX="120.0" layoutY="100.0" text="↑ +9%" textFill="#10B981"><font><Font name="Arial Bold" size="12.0" /></font></Label>
+            <Label layoutX="175.0" layoutY="100.0" text="em relação ao mês anterior" textFill="#94A3B8"><font><Font name="Arial" size="12.0" /></font></Label>
+            <Circle layoutX="60.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0" startY="0.5639810426540286">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.25" green="0.81" blue="0.26" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.42" green="1.0" blue="0.43" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Circle>
+            <ImageView fitHeight="53.0" fitWidth="60.0" layoutX="35.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@ImagensAbaProdutos/ÍconeAtivo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+
+      <AnchorPane layoutX="773.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #1E293B; -fx-background-radius: 10px; -fx-border-color: #334155; -fx-border-radius: 10px;">
+         <children>
+            <Label layoutX="120.0" layoutY="30.0" text="Subcategorias" textFill="#94A3B8"><font><Font name="Arial" size="15.0" /></font></Label>
+            <Label fx:id="lblSubcategorias" layoutX="130.0" layoutY="55.0" text="0" textFill="#F8FAFC"><font><Font name="Arial Bold" size="25.0" /></font></Label>
+            <Label layoutX="120.0" layoutY="100.0" text="↑ +20%" textFill="#10B981"><font><Font name="Arial Bold" size="12.0" /></font></Label>
+            <Label layoutX="175.0" layoutY="100.0" text="em relação ao mês anterior" textFill="#94A3B8"><font><Font name="Arial" size="12.0" /></font></Label>
+            <Circle layoutX="60.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0" startY="0.5639810426540286">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.81" green="0.67" blue="0.25" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.96" green="0.66" blue="0.38" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Circle>
+            <ImageView fitHeight="54.0" fitWidth="47.0" layoutX="36.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/stacks_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+
+      <AnchorPane layoutX="1150.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #1E293B; -fx-background-radius: 10px; -fx-border-color: #334155; -fx-border-radius: 10px;">
+         <children>
+            <Label layoutX="120.0" layoutY="30.0" text="Produtos Vinculados" textFill="#94A3B8"><font><Font name="Arial" size="15.0" /></font></Label>
+            <Label fx:id="lblProdutosVinculados" layoutX="130.0" layoutY="55.0" text="0" textFill="#F8FAFC"><font><Font name="Arial Bold" size="25.0" /></font></Label>
+            <Label layoutX="120.0" layoutY="100.0" text="↑ +5%" textFill="#10B981"><font><Font name="Arial Bold" size="12.0" /></font></Label>
+            <Label layoutX="175.0" layoutY="100.0" text="em relação ao mês anterior" textFill="#94A3B8"><font><Font name="Arial" size="12.0" /></font></Label>
+            <Circle layoutX="60.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0" startY="0.5639810426540286">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.25" green="0.34" blue="0.81" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.28" green="0.47" blue="0.86" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Circle>
+            <ImageView fitHeight="52.0" fitWidth="60.0" layoutX="35.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/package_2_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+
+      <!-- PAINEL ESQUERDO: LISTA DE CATEGORIAS -->
+      <AnchorPane layoutX="18.0" layoutY="240.0" prefHeight="700.0" prefWidth="1116.0" style="-fx-background-color: #1E293B; -fx-background-radius: 10px; -fx-border-color: #334155; -fx-border-radius: 10px;">
+         <children>
+            <Label layoutX="53.0" layoutY="20.0" text="Lista de Categorias" textFill="#F8FAFC"><font><Font name="Arial Bold" size="16.0" /></font></Label>
+            
+            <TextField fx:id="txtPesquisarCategoria" layoutX="14.0" layoutY="60.0" prefHeight="35.0" prefWidth="540.0" promptText="Buscar categoria..." style="-fx-background-color: #0F172A; -fx-background-radius: 5px; -fx-border-color: #334155; -fx-border-radius: 5px; -fx-padding: 0 0 0 40px; -fx-text-fill: #F8FAFC; -fx-prompt-text-fill: #94A3B8; -fx-padding: 0 0 0 52;" />
+            <Label graphicTextGap="15.0" layoutX="24.0" layoutY="68.0" textFill="#94A3B8" />
+
+            <ComboBox fx:id="comboTodosStatus" layoutX="567.0" layoutY="60.0" prefHeight="35.0" prefWidth="140.0" promptText="Todos os Status" style="-fx-background-color: #0F172A; -fx-background-radius: 5px; -fx-border-color: #334155; -fx-border-radius: 5px; -fx-base: #0F172A; -fx-prompt-text-fill: #94A3B8;" />
+            <ComboBox fx:id="comboTodosTipos" layoutX="721.0" layoutY="60.0" prefHeight="35.0" prefWidth="140.0" promptText="Todos os Tipos" style="-fx-background-color: #0F172A; -fx-background-radius: 5px; -fx-border-color: #334155; -fx-border-radius: 5px; -fx-base: #0F172A; -fx-prompt-text-fill: #94A3B8;" />
+            <Button fx:id="btnImportar" layoutX="875.0" layoutY="60.0" prefHeight="35.0" prefWidth="105.0" style="-fx-background-color: #3B82F6; -fx-background-radius: 5px; -fx-cursor: hand;" text="Importar" textFill="WHITE"><font><Font name="Arial Bold" size="12.0" /></font></Button>
+            <Button fx:id="btnExportar" layoutX="995.0" layoutY="60.0" prefHeight="35.0" prefWidth="105.0" style="-fx-background-color: #0F172A; -fx-background-radius: 5px; -fx-border-color: #334155; -fx-border-radius: 5px; -fx-cursor: hand;" text="Exportar" textFill="#F8FAFC" />
+
+            <TableView fx:id="tabelaCategorias" fixedCellSize="45.0" layoutX="14.0" layoutY="115.0" prefHeight="500.0" prefWidth="1089.0" style="-fx-background-color: #0F172A; -fx-control-inner-background: #0F172A; -fx-control-inner-background-alt: #1E293B; -fx-base: #1E293B; -fx-accent: #3B82F6; -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-table-cell-border-color: #334155; -fx-border-color: #334155; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-background-radius: 4px; -fx-font-family: Arial; -fx-font-size: 13px; -fx-text-background-color: #F8FAFC;">
+                <columns>
+                    <TableColumn fx:id="colCodigo" prefWidth="90.0" style="-fx-alignment: CENTER;" text="Código" />
+                    <TableColumn fx:id="colCategoria" prefWidth="200.0" style="-fx-alignment: CENTER-LEFT;" text="Categoria" />
+                    <TableColumn fx:id="colDescricao" prefWidth="360.0" style="-fx-alignment: CENTER-LEFT;" text="Descrição" />
+                    <TableColumn fx:id="colProdutos" prefWidth="120.0" style="-fx-alignment: CENTER;" text="Produtos" />
+                    <TableColumn fx:id="colStatus" prefWidth="120.0" style="-fx-alignment: CENTER;" text="Status" />
+                    <TableColumn fx:id="colAcoes" prefWidth="190.0" style="-fx-alignment: CENTER;" text="Ações" />
+                </columns>
+            </TableView>
+
+           <Label fx:id="lblMostrandoCategorias" layoutX="18.0" layoutY="645.0" text="Mostrando 1 a 10 de 28 categorias" textFill="#94A3B8"><font><Font name="Arial" size="12.0" /></font></Label>
+           <Pagination fx:id="paginacaoCategorias" currentPageIndex="0" layoutX="700.0" layoutY="630.0" maxPageIndicatorCount="5" pageCount="3" prefHeight="55.0" prefWidth="400.0" style="-fx-base: #1E293B; -fx-accent: #3B82F6; -fx-background-color: transparent; -fx-border-color: transparent;" />
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="31.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/search_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+
+      <!-- PAINEL DIREITO: CADASTRO RÁPIDO -->
+      <AnchorPane layoutX="1150.0" layoutY="240.0" prefHeight="450.0" prefWidth="360.0" style="-fx-background-color: #1E293B; -fx-background-radius: 10px; -fx-border-color: #334155; -fx-border-radius: 10px;">
+         <children>
+            <Label layoutX="55.0" layoutY="18.0" text="Cadastro Rápido" textFill="#F8FAFC"><font><Font name="Arial Bold" size="16.0" /></font></Label>
+            <Label layoutX="55.0" layoutY="40.0" text="Adicione uma nova categoria ao sistema." textFill="#94A3B8"><font><Font name="Arial" size="11.5" /></font></Label>
+
+            <Label layoutX="14.0" layoutY="75.0" text="Nome da Categoria *" textFill="#94A3B8"><font><Font name="Arial" size="12.0" /></font></Label>
+            <TextField fx:id="txtNomeCategoria" layoutX="14.0" layoutY="95.0" prefHeight="35.0" prefWidth="332.0" promptText="Ex.: Bebidas" style="-fx-background-color: #0F172A; -fx-background-radius: 5px; -fx-border-color: #334155; -fx-border-radius: 5px; -fx-text-fill: #F8FAFC; -fx-prompt-text-fill: #94A3B8;" />
+
+            <Label layoutX="14.0" layoutY="145.0" text="Descrição *" textFill="#94A3B8"><font><Font name="Arial" size="12.0" /></font></Label>
+            <TextField fx:id="txtDescricao" layoutX="14.0" layoutY="165.0" prefHeight="35.0" prefWidth="332.0" promptText="Descreva a categoria..." style="-fx-background-color: #0F172A; -fx-background-radius: 5px; -fx-border-color: #334155; -fx-border-radius: 5px; -fx-text-fill: #F8FAFC; -fx-prompt-text-fill: #94A3B8;" />
+
+            <Label layoutX="14.0" layoutY="215.0" text="Categoria Pai *" textFill="#94A3B8"><font><Font name="Arial" size="12.0" /></font></Label>
+            <ComboBox fx:id="comboCategoriaPai" layoutX="14.0" layoutY="235.0" prefHeight="35.0" prefWidth="332.0" promptText="Nenhuma (Categoria Principal)" style="-fx-background-color: #0F172A; -fx-background-radius: 5px; -fx-border-color: #334155; -fx-border-radius: 5px; -fx-control-inner-background: #0F172A; -fx-base: #0F172A; -fx-prompt-text-fill: #94A3B8;" />
+
+            <Label layoutX="14.0" layoutY="285.0" text="Status *" textFill="#94A3B8"><font><Font name="Arial" size="12.0" /></font></Label>
+            <ComboBox fx:id="comboStatusCadastro" layoutX="14.0" layoutY="305.0" prefHeight="35.0" prefWidth="160.0" promptText="Ativo" style="-fx-background-color: #0F172A; -fx-background-radius: 5px; -fx-border-color: #334155; -fx-border-radius: 5px; -fx-control-inner-background: #0F172A; -fx-base: #0F172A;" />
+
+            <Label layoutX="186.0" layoutY="285.0" text="Exibir no Menu" textFill="#94A3B8"><font><Font name="Arial" size="12.0" /></font></Label>
+            <ComboBox fx:id="comboExibirMenu" layoutX="186.0" layoutY="305.0" prefHeight="35.0" prefWidth="160.0" promptText="Sim" style="-fx-background-color: #0F172A; -fx-background-radius: 5px; -fx-border-color: #334155; -fx-border-radius: 5px; -fx-control-inner-background: #0F172A; -fx-base: #0F172A;" />
+
+            <Button fx:id="btnSalvarCategoria" layoutX="14.0" layoutY="395.0" prefHeight="35.0" prefWidth="160.0" style="-fx-background-color: #10B981; -fx-background-radius: 5px; -fx-cursor: hand;" text="💾 Salvar Categoria" textFill="WHITE"><font><Font name="Arial Bold" size="12.0" /></font></Button>
+            <Button fx:id="btnLimparCampos" layoutX="186.0" layoutY="395.0" prefHeight="35.0" prefWidth="160.0" style="-fx-background-color: #3B82F6; -fx-background-radius: 5px; -fx-cursor: hand;" text="🧹 Limpar Campos" textFill="WHITE"><font><Font name="Arial Bold" size="12.0" /></font></Button>
+            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@ImagensAbaProdutos/ÍconeAdicionar.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+
+      <!-- PAINEL DIREITO INFERIOR: CATEGORIAS MAIS POPULARES -->
+      <AnchorPane layoutX="1150.0" layoutY="705.0" prefHeight="235.0" prefWidth="360.0" style="-fx-background-color: #1E293B; -fx-background-radius: 10px; -fx-border-color: #334155; -fx-border-radius: 10px;">
+         <children>
+            <Label layoutX="40.0" layoutY="15.0" text="Categorias Mais Populares" textFill="#F8FAFC"><font><Font name="Arial Bold" size="14.0" /></font></Label>
+            <Label layoutX="40.0" layoutY="35.0" text="Por quantidade de produtos" textFill="#94A3B8"><font><Font name="Arial" size="11.0" /></font></Label>
+            
+            <BarChart fx:id="graficoPopulares" horizontalGridLinesVisible="false" layoutX="5.0" layoutY="60.0" legendVisible="false" prefHeight="165.0" prefWidth="345.0" styleClass="grafico-vendas" verticalGridLinesVisible="false">
+              <xAxis><CategoryAxis side="BOTTOM" tickLabelFill="#94A3B8" /></xAxis>
+              <yAxis><NumberAxis side="LEFT" tickLabelFill="#94A3B8" /></yAxis>
+            </BarChart>
+         </children>
+      </AnchorPane>
+
+    </children>
+</AnchorPane>

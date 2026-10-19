@@ -1,0 +1,39 @@
+/* ========================================================
+   ESTILOS EXCLUSIVOS - MENU LATERAL (PALETA GESTÃO MODERNA)
+   ======================================================== */
+
+/* Fundo do Menu Lateral (VBox) */
+.menu-lateral {
+    -fx-background-color: #0F172A; /* Slate 900: Azul-acinzentado super escuro e elegante */
+}
+
+/* Base dos botões do menu */
+.botao-menu {
+    -fx-background-color: transparent;
+    -fx-text-fill: #94A3B8; /* Cinza Azul-Claro: tom discreto para os inativos */
+    -fx-font-size: 15px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 0 0 20px; /* Afasta o texto da borda esquerda */
+    -fx-cursor: hand;
+    -fx-border-width: 0px;
+    
+    /* Arredonda apenas os cantos direitos (Topo-Dir, Fundo-Dir) */
+    -fx-background-radius: 0 30 30 0; 
+}
+
+/* Efeito ao passar o mouse */
+.botao-menu:hover {
+    -fx-background-color: #1E293B; /* Slate 800: Clareia levemente para destacar */
+    -fx-text-fill: #F8FAFC; /* Branco Gelo: O texto acende ao passar o rato */
+}
+
+/* Botão Ativo (Ex: Dashboard) */
+.botao-menu-ativo {
+    -fx-background-color: #1E293B; /* Mesmo fundo do hover, para mostrar que está selecionado */
+    -fx-text-fill: #F8FAFC; /* Texto Branco Gelo */
+    
+    /* Linha de marcação em Azul Vibrante na esquerda */
+    -fx-border-color: transparent transparent transparent #3B82F6; 
+    -fx-border-width: 0 0 0 5px;
+    -fx-border-radius: 0 30 30 0;
+}

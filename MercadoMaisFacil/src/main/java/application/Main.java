@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage janela) throws Exception {
 
         Parent root = FXMLLoader.load(
-                getClass().getResource("/application/telainicial.fxml")
+                getClass().getResource("/application/menu.fxml")
         );
 
         Scene cena = new Scene(root, 1920, 1080);

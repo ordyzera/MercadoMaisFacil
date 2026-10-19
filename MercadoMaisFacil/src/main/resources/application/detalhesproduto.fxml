@@ -10,92 +10,95 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="700.0" prefWidth="640.0" style="-fx-background-color: #072041; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControleDetalhesProduto">
+<AnchorPane prefHeight="700.0" prefWidth="640.0" style="-fx-background-color: #0F172A; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControleDetalhesProduto">
     <children>
-        <VBox layoutX="18.0" layoutY="18.0" prefHeight="664.0" prefWidth="604.0" spacing="18.0" style="-fx-background-color: #0B2A52; -fx-background-radius: 16; -fx-border-color: #3F648D; -fx-border-radius: 16; -fx-border-width: 1; -fx-padding: 22;">
+        <VBox layoutX="18.0" layoutY="18.0" prefHeight="664.0" prefWidth="604.0" spacing="18.0" style="-fx-background-color: #1E293B; -fx-background-radius: 16; -fx-border-color: #334155; -fx-border-radius: 16; -fx-border-width: 1; -fx-padding: 22;">
             <children>
+                <!-- CABEÇALHO DO MODAL -->
                 <HBox alignment="CENTER_LEFT" spacing="12.0">
                     <children>
-                        <VBox alignment="CENTER" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: #123D68; -fx-background-radius: 12;">
+                        <VBox alignment="CENTER" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: #0F172A; -fx-background-radius: 12;">
                             <children>
-                                <Label style="-fx-text-fill: #5EC8F2; -fx-font-size: 27px; -fx-font-weight: bold;" text="▦" />
+                                <Label style="-fx-text-fill: #3B82F6; -fx-font-size: 27px; -fx-font-weight: bold;" text="▦" />
                             </children>
                         </VBox>
                         <VBox spacing="4.0">
                             <children>
-                                <Label style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;" text="Detalhes do Produto" />
-                                <Label style="-fx-text-fill: #AFC5DD; -fx-font-size: 12px;" text="Informações completas do item cadastrado" />
+                                <Label style="-fx-text-fill: #F8FAFC; -fx-font-size: 22px; -fx-font-weight: bold;" text="Detalhes do Produto" />
+                                <Label style="-fx-text-fill: #94A3B8; -fx-font-size: 12px;" text="Informações completas do item cadastrado" />
                             </children>
                         </VBox>
                         <Region HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
 
-                <HBox alignment="CENTER_LEFT" spacing="12.0" style="-fx-background-color: #082447; -fx-background-radius: 12; -fx-border-color: #244F7B; -fx-border-radius: 12; -fx-padding: 15;">
+                <!-- DESTAQUE: NOME E STATUS -->
+                <HBox alignment="CENTER_LEFT" spacing="12.0" style="-fx-background-color: #0F172A; -fx-background-radius: 12; -fx-border-color: #334155; -fx-border-radius: 12; -fx-padding: 15;">
                     <children>
                         <VBox spacing="6.0">
                             <children>
-                                <Label style="-fx-text-fill: #8FAFCF; -fx-font-size: 10px; -fx-font-weight: bold;" text="NOME DO PRODUTO" />
-                                <Label fx:id="lblNome" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" text="Nome do produto" wrapText="true" />
+                                <Label style="-fx-text-fill: #94A3B8; -fx-font-size: 10px; -fx-font-weight: bold;" text="NOME DO PRODUTO" />
+                                <Label fx:id="lblNome" style="-fx-text-fill: #F8FAFC; -fx-font-size: 18px; -fx-font-weight: bold;" text="Nome do produto" wrapText="true" />
                             </children>
                         </VBox>
                         <Region HBox.hgrow="ALWAYS" />
-                        <Label fx:id="lblStatus" alignment="CENTER" minWidth="70.0" style="-fx-background-color: #174D42; -fx-background-radius: 20; -fx-text-fill: #7DE0B1; -fx-font-size: 10px; -fx-font-weight: bold; -fx-padding: 7 12 7 12;" text="ATIVO" />
+                        <Label fx:id="lblStatus" alignment="CENTER" minWidth="70.0" style="-fx-background-color: #10B981; -fx-background-radius: 20; -fx-text-fill: #F8FAFC; -fx-font-size: 10px; -fx-font-weight: bold; -fx-padding: 7 12 7 12;" text="ATIVO" />
                     </children>
                 </HBox>
 
+                <!-- GRID DE INFORMAÇÕES -->
                 <GridPane hgap="12.0" vgap="12.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0" />
                         <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0" />
                     </columnConstraints>
                     <children>
-                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #082447; -fx-background-radius: 10; -fx-border-color: #244F7B; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #0F172A; -fx-background-radius: 10; -fx-border-color: #334155; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="0" GridPane.rowIndex="0">
                             <children>
-                                <Label style="-fx-text-fill: #8FAFCF; -fx-font-size: 10px; -fx-font-weight: bold;" text="CÓDIGO INTERNO" />
-                                <Label fx:id="lblCodigo" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="0001" />
+                                <Label style="-fx-text-fill: #94A3B8; -fx-font-size: 10px; -fx-font-weight: bold;" text="CÓDIGO INTERNO" />
+                                <Label fx:id="lblCodigo" style="-fx-text-fill: #F8FAFC; -fx-font-size: 14px; -fx-font-weight: bold;" text="0001" />
                             </children>
                         </VBox>
-                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #082447; -fx-background-radius: 10; -fx-border-color: #244F7B; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #0F172A; -fx-background-radius: 10; -fx-border-color: #334155; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="1" GridPane.rowIndex="0">
                             <children>
-                                <Label style="-fx-text-fill: #8FAFCF; -fx-font-size: 10px; -fx-font-weight: bold;" text="CÓDIGO DE BARRAS" />
-                                <Label fx:id="lblCodigoBarras" style="-fx-text-fill: white; -fx-font-size: 13px;" text="Não informado" wrapText="true" />
+                                <Label style="-fx-text-fill: #94A3B8; -fx-font-size: 10px; -fx-font-weight: bold;" text="CÓDIGO DE BARRAS" />
+                                <Label fx:id="lblCodigoBarras" style="-fx-text-fill: #F8FAFC; -fx-font-size: 13px;" text="Não informado" wrapText="true" />
                             </children>
                         </VBox>
-                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #082447; -fx-background-radius: 10; -fx-border-color: #244F7B; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #0F172A; -fx-background-radius: 10; -fx-border-color: #334155; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="0" GridPane.rowIndex="1">
                             <children>
-                                <Label style="-fx-text-fill: #8FAFCF; -fx-font-size: 10px; -fx-font-weight: bold;" text="CATEGORIA" />
-                                <Label fx:id="lblCategoria" style="-fx-text-fill: white; -fx-font-size: 13px;" text="Não informada" wrapText="true" />
+                                <Label style="-fx-text-fill: #94A3B8; -fx-font-size: 10px; -fx-font-weight: bold;" text="CATEGORIA" />
+                                <Label fx:id="lblCategoria" style="-fx-text-fill: #F8FAFC; -fx-font-size: 13px;" text="Não informada" wrapText="true" />
                             </children>
                         </VBox>
-                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #082447; -fx-background-radius: 10; -fx-border-color: #244F7B; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #0F172A; -fx-background-radius: 10; -fx-border-color: #334155; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <children>
-                                <Label style="-fx-text-fill: #8FAFCF; -fx-font-size: 10px; -fx-font-weight: bold;" text="MARCA" />
-                                <Label fx:id="lblMarca" style="-fx-text-fill: white; -fx-font-size: 13px;" text="Não informada" wrapText="true" />
+                                <Label style="-fx-text-fill: #94A3B8; -fx-font-size: 10px; -fx-font-weight: bold;" text="MARCA" />
+                                <Label fx:id="lblMarca" style="-fx-text-fill: #F8FAFC; -fx-font-size: 13px;" text="Não informada" wrapText="true" />
                             </children>
                         </VBox>
-                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #082447; -fx-background-radius: 10; -fx-border-color: #244F7B; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #0F172A; -fx-background-radius: 10; -fx-border-color: #334155; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="0" GridPane.rowIndex="2">
                             <children>
-                                <Label style="-fx-text-fill: #8FAFCF; -fx-font-size: 10px; -fx-font-weight: bold;" text="PREÇO DE VENDA" />
-                                <Label fx:id="lblPreco" style="-fx-text-fill: #5EC8F2; -fx-font-size: 17px; -fx-font-weight: bold;" text="R$ 0,00" />
+                                <Label style="-fx-text-fill: #94A3B8; -fx-font-size: 10px; -fx-font-weight: bold;" text="PREÇO DE VENDA" />
+                                <Label fx:id="lblPreco" style="-fx-text-fill: #10B981; -fx-font-size: 17px; -fx-font-weight: bold;" text="R$ 0,00" />
                             </children>
                         </VBox>
-                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #082447; -fx-background-radius: 10; -fx-border-color: #244F7B; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #0F172A; -fx-background-radius: 10; -fx-border-color: #334155; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                             <children>
-                                <Label style="-fx-text-fill: #8FAFCF; -fx-font-size: 10px; -fx-font-weight: bold;" text="ESTOQUE ATUAL" />
-                                <Label fx:id="lblEstoque" style="-fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold;" text="0 UN" />
+                                <Label style="-fx-text-fill: #94A3B8; -fx-font-size: 10px; -fx-font-weight: bold;" text="ESTOQUE ATUAL" />
+                                <Label fx:id="lblEstoque" style="-fx-text-fill: #F8FAFC; -fx-font-size: 15px; -fx-font-weight: bold;" text="0 UN" />
                             </children>
                         </VBox>
-                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #082447; -fx-background-radius: 10; -fx-border-color: #244F7B; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #0F172A; -fx-background-radius: 10; -fx-border-color: #334155; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="0" GridPane.rowIndex="3">
                             <children>
-                                <Label style="-fx-text-fill: #8FAFCF; -fx-font-size: 10px; -fx-font-weight: bold;" text="ESTOQUE MÍNIMO" />
-                                <Label fx:id="lblEstoqueMinimo" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="0" />
+                                <Label style="-fx-text-fill: #94A3B8; -fx-font-size: 10px; -fx-font-weight: bold;" text="ESTOQUE MÍNIMO" />
+                                <Label fx:id="lblEstoqueMinimo" style="-fx-text-fill: #F8FAFC; -fx-font-size: 14px; -fx-font-weight: bold;" text="0" />
                             </children>
                         </VBox>
-                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #082447; -fx-background-radius: 10; -fx-border-color: #244F7B; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <VBox minHeight="72.0" spacing="7.0" style="-fx-background-color: #0F172A; -fx-background-radius: 10; -fx-border-color: #334155; -fx-border-radius: 10; -fx-padding: 12;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                             <children>
-                                <Label style="-fx-text-fill: #8FAFCF; -fx-font-size: 10px; -fx-font-weight: bold;" text="UNIDADE DE MEDIDA" />
-                                <Label fx:id="lblUnidade" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="UN" />
+                                <Label style="-fx-text-fill: #94A3B8; -fx-font-size: 10px; -fx-font-weight: bold;" text="UNIDADE DE MEDIDA" />
+                                <Label fx:id="lblUnidade" style="-fx-text-fill: #F8FAFC; -fx-font-size: 14px; -fx-font-weight: bold;" text="UN" />
                             </children>
                         </VBox>
                     </children>
@@ -108,11 +111,13 @@
                 </GridPane>
 
                 <Region VBox.vgrow="ALWAYS" />
-                <Label style="-fx-text-fill: #8FAFCF; -fx-font-size: 11px;" text="Os dados desta janela são somente para consulta." />
+                
+                <!-- RODAPÉ E BOTÕES -->
+                <Label style="-fx-text-fill: #94A3B8; -fx-font-size: 11px;" text="Os dados desta janela são somente para consulta." />
                 <HBox alignment="CENTER_RIGHT" spacing="10.0">
                     <children>
-                        <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editar" style="-fx-background-color: #1678D3; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold; -fx-padding: 11 18 11 18; -fx-cursor: hand;" text="Editar produto" />
-                        <Button fx:id="btnFechar" mnemonicParsing="false" onAction="#fechar" style="-fx-background-color: #173B61; -fx-background-radius: 8; -fx-border-color: #3F648D; -fx-border-radius: 8; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 11 20 11 20; -fx-cursor: hand;" text="Fechar" />
+                        <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editar" style="-fx-background-color: #3B82F6; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold; -fx-padding: 11 18 11 18; -fx-cursor: hand;" text="Editar produto" />
+                        <Button fx:id="btnFechar" mnemonicParsing="false" onAction="#fechar" style="-fx-background-color: #0F172A; -fx-background-radius: 8; -fx-border-color: #334155; -fx-border-radius: 8; -fx-text-fill: #F8FAFC; -fx-font-size: 12px; -fx-padding: 11 20 11 20; -fx-cursor: hand;" text="Fechar" />
                     </children>
                 </HBox>
             </children>

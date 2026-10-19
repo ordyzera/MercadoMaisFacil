@@ -1,218 +1,106 @@
-/* ============================= */
-/* CARD DO GRÁFICO               */
-/* ============================= */
+/* ========================================================
+   ESTILOS EXCLUSIVOS - DASHBOARD (PALETA GESTÃO MODERNA)
+   ======================================================== */
 
+/* 1. CARDS E BOTOES */
 .card-grafico {
-    -fx-background-color: #072041;
+    -fx-background-color: #1E293B; /* Slate 800 - Fundo dos blocos */
     -fx-background-radius: 10px;
-
-    -fx-border-color: #3F648D;
+    -fx-border-color: #334155; /* Slate 700 - Borda muito sutil */
     -fx-border-width: 1px;
     -fx-border-radius: 10px;
 }
 
-/* ============================= */
-/* ÁREA DO GRÁFICO               */
-/* ============================= */
-
-.grafico-vendas {
-    -fx-background-color: transparent;
-    -fx-padding: 0px;
-}
-
-.grafico-vendas .chart-content {
-    -fx-background-color: transparent;
-}
-
-.grafico-vendas .chart-plot-background {
-    -fx-background-color: #072A58;
-}
-
-/* ============================= */
-/* EIXOS                         */
-/* ============================= */
-
-.grafico-vendas .axis {
-    -fx-tick-label-fill: #B8C8DC;
-    -fx-font-size: 11px;
-}
-
-.grafico-vendas .axis-line {
-    -fx-stroke: #315C87;
-}
-
-.grafico-vendas .axis-tick-mark {
-    -fx-stroke: #315C87;
-}
-
-.grafico-vendas .axis-minor-tick-mark {
-    -fx-stroke: #315C87;
-}
-
-/* ============================= */
-/* GRADE                         */
-/* ============================= */
-
-.grafico-vendas .chart-horizontal-grid-lines {
-    -fx-stroke: rgba(255, 255, 255, 0.10);
-}
-
-.grafico-vendas .chart-vertical-grid-lines {
-    -fx-stroke: rgba(255, 255, 255, 0.08);
-}
-
-.grafico-vendas .chart-alternative-row-fill {
-    -fx-fill: transparent;
-}
-
-.grafico-vendas .chart-alternative-column-fill {
-    -fx-fill: transparent;
-}
-
-/* ============================= */
-/* LINHA                         */
-/* ============================= */
-
-.grafico-vendas .chart-series-area-line {
-    -fx-stroke: #2196F3;
-    -fx-stroke-width: 3px;
-}
-
-/* ============================= */
-/* PREENCHIMENTO                 */
-/* ============================= */
-
-.grafico-vendas .chart-series-area-fill {
-    -fx-fill: rgba(33, 150, 243, 0.30);
-}
-
-/* ============================= */
-/* PONTOS                        */
-/* ============================= */
-
-.grafico-vendas .chart-area-symbol {
-    -fx-background-color: #64B5F6, #2196F3;
-    -fx-background-insets: 0, 2;
-    -fx-background-radius: 7px;
-    -fx-padding: 5px;
-}
-
-/* ============================= */
-/* COMBOBOX                      */
-/* ============================= */
-
-.combo-grafico {
-    -fx-background-color: #082D5E;
-    -fx-border-color: #176DB0;
+.botao-secundario {
+    -fx-background-color: #1E293B;
+    -fx-border-color: #334155;
     -fx-border-radius: 7px;
     -fx-background-radius: 7px;
+    -fx-text-fill: #F8FAFC;
+    -fx-cursor: hand;
 }
 
-.combo-grafico .list-cell {
-    -fx-text-fill: white;
-    -fx-background-color: transparent;
+.botao-secundario:hover {
+    -fx-background-color: #334155;
 }
 
-.combo-grafico .arrow {
-    -fx-background-color: #AFC7E3;
-}
-
-
-
-
-/* ================================= */
-/* GRÁFICO DE VENDAS POR CATEGORIA   */
-/* ================================= */
-
-.grafico-categoria {
-    -fx-background-color: transparent;
-    -fx-padding: 5px;
-}
-
-.grafico-categoria .chart-content {
-    -fx-background-color: transparent;
-}
-
-.grafico-categoria .chart-pie {
-    -fx-border-width: 0px;
-}
-
-/* Alimentos */
-.grafico-categoria .default-color0.chart-pie {
-    -fx-pie-color: #2196F3;
-}
-
-/* Bebidas */
-.grafico-categoria .default-color1.chart-pie {
-    -fx-pie-color: #5EC8F2;
-}
-
-/* Higiene */
-.grafico-categoria .default-color2.chart-pie {
-    -fx-pie-color: #FFC533;
-}
-
-/* Frios */
-.grafico-categoria .default-color3.chart-pie {
-    -fx-pie-color: #FF8A32;
-}
-
-/* Padaria */
-.grafico-categoria .default-color4.chart-pie {
-    -fx-pie-color: #7658E8;
-}
-
-/* Outros */
-.grafico-categoria .default-color5.chart-pie {
-    -fx-pie-color: #8C9AAA;
-}
-
-
-
-
+/* 2. TABELAS DO DASHBOARD */
 .tabela-dashboard {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
 
-.tabela-dashboard .column-header-background {
-    -fx-background-color: #0B2A52;
-}
-
-.tabela-dashboard .column-header {
-    -fx-background-color: #0B2A52;
+.tabela-dashboard .column-header-background,
+.tabela-dashboard .column-header,
+.tabela-dashboard .filler {
+    -fx-background-color: #0F172A; /* Slate 900 - Cabeçalho escuro */
     -fx-border-color: transparent;
 }
 
 .tabela-dashboard .column-header .label {
-    -fx-text-fill: #B8C8DC;
+    -fx-text-fill: #94A3B8; /* Cinza claro para os títulos das colunas */
     -fx-font-weight: bold;
 }
 
 .tabela-dashboard .table-cell {
-    -fx-text-fill: white;
+    -fx-text-fill: #F8FAFC; /* Texto branco gelo */
     -fx-border-color: transparent;
 }
 
 .tabela-dashboard .table-row-cell {
-    -fx-background-color: #072A58;
+    -fx-background-color: #1E293B; /* Cor normal da linha */
 }
 
 .tabela-dashboard .table-row-cell:odd {
-    -fx-background-color: #082F62;
+    -fx-background-color: #192231; /* Efeito zebrado super discreto */
 }
 
 .tabela-dashboard .table-row-cell:selected {
-    -fx-background-color: #176DB0;
+    -fx-background-color: #3B82F6; /* Azul vibrante quando seleciona a linha */
 }
 
-.tabela-dashboard .filler {
-    -fx-background-color: #0B2A52;
+/* 3. GRÁFICO DE VENDAS (LINHA) */
+.grafico-vendas { -fx-background-color: transparent; -fx-padding: 0px; }
+.grafico-vendas .chart-content { -fx-background-color: transparent; }
+.grafico-vendas .chart-plot-background { -fx-background-color: #1E293B; }
+
+.grafico-vendas .axis { -fx-tick-label-fill: #94A3B8; -fx-font-size: 11px; }
+.grafico-vendas .axis-line, .grafico-vendas .axis-tick-mark, .grafico-vendas .axis-minor-tick-mark {
+    -fx-stroke: #334155;
+}
+.grafico-vendas .chart-horizontal-grid-lines { -fx-stroke: rgba(255, 255, 255, 0.05); }
+.grafico-vendas .chart-vertical-grid-lines { -fx-stroke: transparent; }
+.grafico-vendas .chart-alternative-row-fill, .grafico-vendas .chart-alternative-column-fill { -fx-fill: transparent; }
+
+/* Linha Azul do Gráfico */
+.grafico-vendas .chart-series-area-line { -fx-stroke: #3B82F6; -fx-stroke-width: 3px; }
+.grafico-vendas .chart-series-area-fill { -fx-fill: rgba(59, 130, 246, 0.20); }
+.grafico-vendas .chart-area-symbol {
+    -fx-background-color: #60A5FA, #3B82F6;
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 7px;
+    -fx-padding: 5px;
 }
 
-.botao-secundario {
-    -fx-background-color: #082D5E;
-    -fx-border-color: #176DB0;
+/* 4. GRÁFICO DE PIZZA (CORES) */
+.grafico-categoria { -fx-background-color: transparent; -fx-padding: 5px; }
+.grafico-categoria .chart-content { -fx-background-color: transparent; }
+.grafico-categoria .chart-pie { -fx-border-width: 0px; }
+
+/* Cores modernas para as fatias */
+.grafico-categoria .default-color0.chart-pie { -fx-pie-color: #3B82F6; } /* Azul */
+.grafico-categoria .default-color1.chart-pie { -fx-pie-color: #10B981; } /* Verde */
+.grafico-categoria .default-color2.chart-pie { -fx-pie-color: #FACC15; } /* Amarelo */
+.grafico-categoria .default-color3.chart-pie { -fx-pie-color: #F97316; } /* Laranja */
+.grafico-categoria .default-color4.chart-pie { -fx-pie-color: #8B5CF6; } /* Roxo */
+.grafico-categoria .default-color5.chart-pie { -fx-pie-color: #64748B; } /* Cinza */
+
+/* 5. COMBOBOXES */
+.combo-grafico {
+    -fx-background-color: #1E293B;
+    -fx-border-color: #334155;
     -fx-border-radius: 7px;
     -fx-background-radius: 7px;
 }
+.combo-grafico .list-cell { -fx-text-fill: #F8FAFC; -fx-background-color: transparent; }
+.combo-grafico .arrow { -fx-background-color: #94A3B8; }

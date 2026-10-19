@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #0F172A;" stylesheets="@menu.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TelaControleInicial">
+    <children>
+        <!-- LOGO -->
+        <ImageView fx:id="imgLogoMercadoMaisFacil" fitHeight="155.0" fitWidth="285.0" layoutX="60.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@imagens/LogoMercadoMaisFacil.png" />
+            </image>
+        </ImageView>
+        
+        <!-- PAINEL CENTRAL ONDE AS TELAS SÃO CARREGADAS -->
+        <AnchorPane fx:id="painelConteudo" layoutX="390.0" layoutY="130.0" prefHeight="950.0" prefWidth="1530.0" style="-fx-background-color: #1E293B;" />
+
+        <!-- MENU LATERAL -->
+        <Button fx:id="btnDashboard" graphicTextGap="15.0" layoutX="24.0" layoutY="190.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" text="DASHBOARD">
+         <styleClass>
+            <String fx:value="botao-menu" />
+            <String fx:value="botao-menu-ativo" />
+         </styleClass>
+         <graphic>
+            <ImageView fitHeight="122.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/home_50dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </graphic>
+        </Button>
+        <Button fx:id="btnProdutos" graphicTextGap="15.0" layoutX="24.0" layoutY="250.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" styleClass="botao-menu" text="PRODUTOS">
+         <graphic>
+            <ImageView fitHeight="56.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/package_2_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button fx:id="btnCategoria" graphicTextGap="15.0" layoutX="24.0" layoutY="320.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" styleClass="botao-menu" text="CATEGORIA">
+         <graphic>
+            <ImageView fitHeight="78.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/dashboard_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button fx:id="btnEstoque" graphicTextGap="15.0" layoutX="24.0" layoutY="390.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" styleClass="botao-menu" text="ESTOQUE">
+         <graphic>
+            <ImageView fitHeight="76.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/warehouse_50dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button fx:id="btnFornecedores" graphicTextGap="15.0" layoutX="24.0" layoutY="460.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" styleClass="botao-menu" text="FORNECEDORES">
+         <graphic>
+            <ImageView fitHeight="88.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/local_shipping_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button fx:id="btnClientes" graphicTextGap="15.0" layoutX="24.0" layoutY="530.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" styleClass="botao-menu" text="CLIENTES">
+         <graphic>
+            <ImageView fitHeight="72.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/group_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button fx:id="btnVendas" graphicTextGap="15.0" layoutX="24.0" layoutY="600.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" styleClass="botao-menu" text="VENDAS">
+         <graphic>
+            <ImageView fitHeight="34.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/shopping_cart_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button fx:id="btnCadastro" graphicTextGap="15.0" layoutX="24.0" layoutY="670.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" styleClass="botao-menu" text="CADASTRO">
+         <graphic>
+            <ImageView fitHeight="44.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/assignment_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button fx:id="btnFinanceiro" graphicTextGap="15.0" layoutX="24.0" layoutY="740.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" styleClass="botao-menu" text="DESPESAS/FINANCEIRO">
+         <graphic>
+            <ImageView fitHeight="46.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/paid_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button fx:id="btnRelatorio" graphicTextGap="15.0" layoutX="24.0" layoutY="810.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" styleClass="botao-menu" text="RELATÓRIOS">
+         <graphic>
+            <ImageView fitHeight="76.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/monitoring_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button fx:id="btnSair" graphicTextGap="15.0" layoutX="24.0" layoutY="960.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="340.0" styleClass="botao-menu" text="SAIR">
+         <graphic>
+            <ImageView fitHeight="54.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/logout_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+
+        <!-- CABEÇALHO SUPERIOR -->
+        <TextField fx:id="txtPesquisa" layoutX="1030.0" layoutY="45.0" prefHeight="40.0" prefWidth="550.0" promptText="Pesquisar produtos, clientes, vendas..." style="-fx-background-color: #1E293B; -fx-border-color: #334155; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-text-fill: #F8FAFC; -fx-prompt-text-fill: #94A3B8; -fx-padding: 0 0 0 52;">
+            <font>
+                <Font name="Arial" size="14.0" />
+            </font>
+        </TextField>
+        <ComboBox fx:id="comboFuncionario" layoutX="1760.0" layoutY="45.0" prefHeight="40.0" prefWidth="150.0" promptText="Adm" style="-fx-background-color: #1E293B; -fx-border-color: #334155; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-base: #1E293B; -fx-padding: 0 0 0 35;" />
+        
+        <Label layoutX="440.0" layoutY="45.0" text="Organização hoje,  &#10;mais vendas amanhã!" textFill="#94A3B8">
+            <font>
+                <Font name="Arial" size="15.0" />
+            </font>
+        </Label>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="1043.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagens/search_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="1774.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagens/person_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>

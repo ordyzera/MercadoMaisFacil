@@ -1,0 +1,23 @@
+/* ========================================================
+   ESTILOS EXCLUSIVOS - TELA DE PRODUTOS
+   ======================================================== */
+
+/* Barra de Rolagem da Tabela */
+.table-view .scroll-bar:vertical,
+.table-view .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.table-view .scroll-bar:vertical .thumb,
+.table-view .scroll-bar:horizontal .thumb {
+    -fx-background-color: #334155; /* Slate 700 - Cinza sofisticado */
+    -fx-background-radius: 5em;
+}
+
+/* Efeito de Focus nos Campos (quando clica para digitar) */
+.text-field:focused,
+.combo-box:focused {
+    -fx-border-color: #3B82F6; /* Destaque em Azul Vibrante */
+    -fx-border-width: 2px;
+    -fx-border-radius: 4px;
+}

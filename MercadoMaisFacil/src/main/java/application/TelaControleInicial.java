@@ -60,14 +60,28 @@ public class TelaControleInicial {
 
     @FXML
     public void initialize() {
-
+        // Carrega a tela e marca o botão inicial ao abrir o sistema
         carregarTela("dashboard.fxml");
+        marcarBotaoAtivo(btnDashboard);
 
-        btnDashboard.setOnAction(
-            evento -> carregarTela("dashboard.fxml")
-        );
+        // Ações dos cliques nos botões
+        btnDashboard.setOnAction(evento -> {
+            carregarTela("dashboard.fxml");
+            marcarBotaoAtivo(btnDashboard);
+        });
         
-        btnProdutos.setOnAction(evento -> carregarTela("produtos.fxml"));
+        btnProdutos.setOnAction(evento -> {
+            carregarTela("produtos.fxml");
+            marcarBotaoAtivo(btnProdutos);
+        });
+
+        // Exemplo para a futura tela de categorias:
+        btnCategoria.setOnAction(evento -> {
+            // carregarTela("categorias.fxml"); // Descomente quando a tela existir
+            marcarBotaoAtivo(btnCategoria);
+        });
+        
+        // Repita o padrão para os restantes botões à medida que for criando as telas...
     }
 
     private void carregarTela(String arquivo) {
@@ -95,6 +109,25 @@ public class TelaControleInicial {
             );
 
             e.printStackTrace();
+        }
+    }
+    
+     private void marcarBotaoAtivo(Button botaoClicado) {
+        
+        Button[] botoesMenu = {
+            btnDashboard, btnProdutos, btnCategoria, btnEstoque,
+            btnFornecedores, btnClientes, btnVendas, btnCadastro,
+            btnFinanceiro, btnRelatorio
+        };
+        
+        // 2. Removemos a classe "botao-menu-ativo" de todos eles
+        for (Button btn : botoesMenu) {
+            btn.getStyleClass().remove("botao-menu-ativo");
+        }
+        
+        // 3. Adicionamos a classe apenas ao botão que foi clicado
+        if (!botaoClicado.getStyleClass().contains("botao-menu-ativo")) {
+            botaoClicado.getStyleClass().add("botao-menu-ativo");
         }
     }
 }

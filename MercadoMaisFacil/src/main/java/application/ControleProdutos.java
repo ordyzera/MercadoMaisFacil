@@ -43,6 +43,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
@@ -140,6 +141,13 @@ public class ControleProdutos {
 
     @FXML
     private Label lblMostrandoProdutos;
+    
+    // =========================================================
+    // IMAGES
+    // =========================================================
+    
+    @FXML
+    private ImageView imgCodigoBarras;
 
     // =========================================================
     // TABELA E PAGINAÇÃO

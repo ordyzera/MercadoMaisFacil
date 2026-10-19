@@ -9,111 +9,181 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="painelDashboard" prefHeight="950.0" prefWidth="1530.0" style="-fx-background-color: #0B2A52;" stylesheets="@dashboard.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControleDashboard">
+<AnchorPane fx:id="painelDashboard" prefHeight="950.0" prefWidth="1530.0" style="-fx-background-color: #0F172A;" stylesheets="@dashboard.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControleDashboard">
     <children>
+        <!-- CABEÇALHO -->
         <AnchorPane layoutX="18.0" layoutY="10.0" prefHeight="60.0" prefWidth="1492.0">
             <children>
-                <Label alignment="CENTER" layoutX="0.0" layoutY="8.0" prefHeight="42.0" prefWidth="42.0" text="⌂" textFill="#BEE6FF">
-                    <font>
-                        <Font name="Arial Bold" size="34.0" />
-                    </font>
-                </Label>
-                <Label layoutX="50.0" layoutY="1.0" text="Dashboard" textFill="WHITE">
+                <Label layoutX="70.0" layoutY="6.0" text="Dashboard" textFill="#F8FAFC">
                     <font>
                         <Font name="Arial Bold" size="22.0" />
                     </font>
                 </Label>
-                <Label layoutX="50.0" layoutY="31.0" text="Visão geral do desempenho do seu mercado." textFill="#AFC7E3">
+                <Label layoutX="70.0" layoutY="38.0" text="Visão geral do desempenho do seu mercado." textFill="#94A3B8">
                     <font>
                         <Font name="Arial" size="11.5" />
                     </font>
                 </Label>
-                <AnchorPane layoutX="1217.0" layoutY="0.0" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #072041;                                            -fx-background-radius: 10px;                                            -fx-border-color: #3F648D;                                            -fx-border-radius: 10px;                                            -fx-border-width: 1px;">
+                <AnchorPane layoutX="1217.0" layoutY="0.0" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #1E293B; -fx-background-radius: 10px; -fx-border-color: #334155; -fx-border-radius: 10px; -fx-border-width: 1px;">
                     <children>
-                        <Label alignment="CENTER" layoutX="13.0" layoutY="14.0" prefHeight="32.0" prefWidth="28.0" text="▣" textFill="#9DD8FF">
-                            <font>
-                                <Font name="Arial" size="19.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="lblDataAtual" layoutX="50.0" layoutY="9.0" prefWidth="210.0" text="Hoje é 28 de setembro de 2026" textFill="WHITE">
+                        <Label fx:id="lblDataAtual" layoutX="50.0" layoutY="9.0" prefWidth="210.0" text="Hoje é 28 de setembro de 2026" textFill="#F8FAFC">
                             <font>
                                 <Font name="Arial Bold" size="11.0" />
                             </font>
                         </Label>
-                        <Label fx:id="lblDiaSemana" layoutX="50.0" layoutY="31.0" prefWidth="210.0" text="Segunda-feira, 18:30" textFill="#AFC7E3">
+                        <Label fx:id="lblDiaSemana" layoutX="50.0" layoutY="31.0" prefWidth="210.0" text="Segunda-feira, 18:30" textFill="#94A3B8">
                             <font>
                                 <Font name="Arial" size="10.0" />
                             </font>
                         </Label>
+                  <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/calendar_month_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+                     </image>
+                  </ImageView>
                     </children>
                 </AnchorPane>
+            <ImageView fitHeight="60.0" fitWidth="55.0" layoutX="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/home_50dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="18.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #072041;                                    -fx-background-radius: 10px;                                    -fx-border-color: #3F648D;                                    -fx-border-radius: 10px;">
+
+        <!-- MINI CARDS -->
+        <AnchorPane layoutX="18.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #1E293B; -fx-background-radius: 10px; -fx-border-color: #334155; -fx-border-radius: 10px;">
             <children>
-                <Label layoutX="100.0" layoutY="30.0" text="Vendas de Hoje" textFill="WHITE">
+                <Label layoutX="120.0" layoutY="30.0" text="Vendas de Hoje" textFill="#94A3B8">
                     <font>
                         <Font name="Arial" size="15.0" />
                     </font>
                 </Label>
-                <Label fx:id="lblVendasHoje" layoutX="100.0" layoutY="55.0" text="R$ 0,00" textFill="WHITE">
+                <Label fx:id="lblVendasHoje" layoutX="139.0" layoutY="55.0" text="R$ 0,00" textFill="#F8FAFC">
                     <font>
                         <Font name="Arial Bold" size="25.0" />
                     </font>
                 </Label>
+            <Circle layoutX="60.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0" startY="0.5639810426540286">
+                     <stops>
+                        <Stop><color><Color red="0.25" green="0.81" blue="0.26" /></color></Stop>
+                        <Stop offset="1.0"><color><Color red="0.42" green="1.0" blue="0.43" /></color></Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Circle>
+            <ImageView fitHeight="60.0" fitWidth="52.0" layoutX="33.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/attach_money_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48%20(1).png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="395.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #072041;                                    -fx-background-radius: 10px;                                    -fx-border-color: #3F648D;                                    -fx-border-radius: 10px;">
+        <AnchorPane layoutX="395.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #1E293B; -fx-background-radius: 10px; -fx-border-color: #334155; -fx-border-radius: 10px;">
             <children>
-                <Label layoutX="100.0" layoutY="30.0" text="Faturamento do Mês" textFill="WHITE">
+                <Label layoutX="120.0" layoutY="30.0" text="Faturamento do Mês" textFill="#94A3B8">
                     <font>
                         <Font name="Arial" size="15.0" />
                     </font>
                 </Label>
-                <Label fx:id="lblFaturamentoMes" layoutX="100.0" layoutY="55.0" text="R$ 0,00" textFill="WHITE">
+                <Label fx:id="lblFaturamentoMes" layoutX="130.0" layoutY="55.0" text="R$ 0,00" textFill="#F8FAFC">
                     <font>
                         <Font name="Arial Bold" size="25.0" />
                     </font>
                 </Label>
+            <Circle layoutX="60.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0" startY="0.5639810426540286">
+                     <stops>
+                        <Stop><color><Color red="0.25" green="0.34" blue="0.81" /></color></Stop>
+                        <Stop offset="1.0"><color><Color red="0.28" green="0.47" blue="0.86" /></color></Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Circle>
+            <ImageView fitHeight="60.0" fitWidth="52.0" layoutX="34.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/finance_mode_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48%20(1).png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="773.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #072041;                                    -fx-background-radius: 10px;                                    -fx-border-color: #3F648D;                                    -fx-border-radius: 10px;">
+        <AnchorPane layoutX="773.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #1E293B; -fx-background-radius: 10px; -fx-border-color: #334155; -fx-border-radius: 10px;">
             <children>
-                <Label layoutX="100.0" layoutY="30.0" text="Produtos em Estoque" textFill="WHITE">
+                <Label layoutX="120.0" layoutY="30.0" text="Produtos em Estoque" textFill="#94A3B8">
                     <font>
                         <Font name="Arial" size="15.0" />
                     </font>
                 </Label>
-                <Label fx:id="lblProdutosEstoque" layoutX="100.0" layoutY="55.0" text="0" textFill="WHITE">
+                <Label fx:id="lblProdutosEstoque" layoutX="130.0" layoutY="55.0" text="0" textFill="#F8FAFC">
                     <font>
                         <Font name="Arial Bold" size="25.0" />
                     </font>
                 </Label>
+            <Circle layoutX="60.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0" startY="0.5639810426540286">
+                     <stops>
+                        <Stop><color><Color red="0.81" green="0.67" blue="0.25" /></color></Stop>
+                        <Stop offset="1.0"><color><Color red="0.96" green="0.66" blue="0.38" /></color></Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Circle>
+            <ImageView fitHeight="93.0" fitWidth="80.0" layoutX="20.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/iconeBox.png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="1150.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #072041;                                    -fx-background-radius: 10px;                                    -fx-border-color: #3F648D;                                    -fx-border-radius: 10px;">
+        <AnchorPane layoutX="1150.0" layoutY="85.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: #1E293B; -fx-background-radius: 10px; -fx-border-color: #334155; -fx-border-radius: 10px;">
             <children>
-                <Label layoutX="100.0" layoutY="30.0" text="Clientes Cadastrados" textFill="WHITE">
+                <Label layoutX="120.0" layoutY="30.0" text="Clientes Cadastrados" textFill="#94A3B8">
                     <font>
                         <Font name="Arial" size="15.0" />
                     </font>
                 </Label>
-                <Label fx:id="lblClientesCadastrados" layoutX="100.0" layoutY="55.0" text="0" textFill="WHITE">
+                <Label fx:id="lblClientesCadastrados" layoutX="130.0" layoutY="55.0" text="0" textFill="#F8FAFC">
                     <font>
                         <Font name="Arial Bold" size="25.0" />
                     </font>
                 </Label>
+            <Circle layoutX="60.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0" startY="0.5639810426540286">
+                     <stops>
+                        <Stop><color><Color red="0.21" green="0.12" blue="0.51" /></color></Stop>
+                        <Stop offset="1.0"><color><Color red="0.28" blue="0.96" /></color></Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Circle>
+            <ImageView fitHeight="45.0" fitWidth="47.0" layoutX="37.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@ImagensDashboard/imgUsuarios.png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
+
+        <!-- GRÁFICOS -->
         <AnchorPane layoutX="18.0" layoutY="240.0" prefHeight="390.0" prefWidth="825.0" styleClass="card-grafico">
             <children>
-                <Label layoutX="22.0" layoutY="15.0" text="Vendas dos Últimos 7 Dias" textFill="WHITE">
+                <Label layoutX="58.0" layoutY="15.0" text="Vendas dos Últimos 7 Dias" textFill="#F8FAFC">
                     <font>
                         <Font name="Arial Bold" size="16.0" />
                     </font>
@@ -127,11 +197,16 @@
                         <NumberAxis side="LEFT" />
                     </yAxis>
                 </AreaChart>
+            <ImageView fitHeight="39.0" fitWidth="32.0" layoutX="20.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/chart_data_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
         <AnchorPane layoutX="860.0" layoutY="240.0" prefHeight="390.0" prefWidth="650.0" styleClass="card-grafico">
             <children>
-                <Label layoutX="22.0" layoutY="15.0" text="Vendas por Categoria" textFill="WHITE">
+                <Label layoutX="48.0" layoutY="15.0" text="Vendas por Categoria" textFill="#F8FAFC">
                     <font>
                         <Font name="Arial Bold" size="16.0" />
                     </font>
@@ -140,15 +215,16 @@
                 <StackPane layoutX="15.0" layoutY="50.0" prefHeight="310.0" prefWidth="330.0">
                     <children>
                         <PieChart fx:id="graficoVendasCategoria" animated="false" labelsVisible="false" legendVisible="false" prefHeight="300.0" prefWidth="330.0" styleClass="grafico-categoria" />
-                        <Circle fill="#072041" mouseTransparent="true" radius="62.0" />
+                        <!-- Círculo interno na cor Slate 800 para fundir com o fundo do cartão -->
+                        <Circle fill="#1E293B" mouseTransparent="true" radius="62.0" />
                         <VBox alignment="CENTER" mouseTransparent="true" spacing="3.0">
                             <children>
-                                <Label fx:id="lblTotalVendasCategoria" text="R$ 640,40" textFill="WHITE">
+                                <Label fx:id="lblTotalVendasCategoria" text="R$ 640,40" textFill="#F8FAFC">
                                     <font>
                                         <Font name="Arial Bold" size="17.0" />
                                     </font>
                                 </Label>
-                                <Label text="Total de Vendas" textFill="#B8C8DC">
+                                <Label text="Total de Vendas" textFill="#94A3B8">
                                     <font>
                                         <Font name="Arial" size="11.0" />
                                     </font>
@@ -157,62 +233,63 @@
                         </VBox>
                     </children>
                 </StackPane>
+                <!-- Legenda de cores atualizada -->
                 <AnchorPane layoutX="365.0" layoutY="80.0" prefHeight="240.0" prefWidth="255.0">
                     <children>
-                        <Circle fill="#2196F3" layoutX="8.0" layoutY="12.0" radius="6.0" />
-                        <Label layoutX="25.0" layoutY="3.0" prefWidth="155.0" text="Alimentos" textFill="WHITE" />
-                        <Label fx:id="lblPctAlimentos" layoutX="195.0" layoutY="3.0" text="0%" textFill="WHITE">
-                            <font>
-                                <Font name="Arial Bold" size="13.0" />
-                            </font>
+                        <Circle fill="#3B82F6" layoutX="8.0" layoutY="12.0" radius="6.0" />
+                        <Label layoutX="25.0" layoutY="3.0" prefWidth="155.0" text="Alimentos" textFill="#94A3B8" />
+                        <Label fx:id="lblPctAlimentos" layoutX="195.0" layoutY="3.0" text="0%" textFill="#F8FAFC">
+                            <font><Font name="Arial Bold" size="13.0" /></font>
                         </Label>
-                        <Circle fill="#5EC8F2" layoutX="8.0" layoutY="47.0" radius="6.0" />
-                        <Label layoutX="25.0" layoutY="38.0" prefWidth="155.0" text="Bebidas" textFill="WHITE" />
-                        <Label fx:id="lblPctBebidas" layoutX="195.0" layoutY="38.0" text="0%" textFill="WHITE">
-                            <font>
-                                <Font name="Arial Bold" size="13.0" />
-                            </font>
+                        
+                        <Circle fill="#10B981" layoutX="8.0" layoutY="47.0" radius="6.0" />
+                        <Label layoutX="25.0" layoutY="38.0" prefWidth="155.0" text="Bebidas" textFill="#94A3B8" />
+                        <Label fx:id="lblPctBebidas" layoutX="195.0" layoutY="38.0" text="0%" textFill="#F8FAFC">
+                            <font><Font name="Arial Bold" size="13.0" /></font>
                         </Label>
-                        <Circle fill="#FFC533" layoutX="8.0" layoutY="82.0" radius="6.0" />
-                        <Label layoutX="25.0" layoutY="73.0" prefWidth="155.0" text="Higiene e Limpeza" textFill="WHITE" />
-                        <Label fx:id="lblPctHigiene" layoutX="195.0" layoutY="73.0" text="0%" textFill="WHITE">
-                            <font>
-                                <Font name="Arial Bold" size="13.0" />
-                            </font>
+                        
+                        <Circle fill="#FACC15" layoutX="8.0" layoutY="82.0" radius="6.0" />
+                        <Label layoutX="25.0" layoutY="73.0" prefWidth="155.0" text="Higiene e Limpeza" textFill="#94A3B8" />
+                        <Label fx:id="lblPctHigiene" layoutX="195.0" layoutY="73.0" text="0%" textFill="#F8FAFC">
+                            <font><Font name="Arial Bold" size="13.0" /></font>
                         </Label>
-                        <Circle fill="#FF8A32" layoutX="8.0" layoutY="117.0" radius="6.0" />
-                        <Label layoutX="25.0" layoutY="108.0" prefWidth="155.0" text="Frios e Laticínios" textFill="WHITE" />
-                        <Label fx:id="lblPctFrios" layoutX="195.0" layoutY="108.0" text="0%" textFill="WHITE">
-                            <font>
-                                <Font name="Arial Bold" size="13.0" />
-                            </font>
+                        
+                        <Circle fill="#F97316" layoutX="8.0" layoutY="117.0" radius="6.0" />
+                        <Label layoutX="25.0" layoutY="108.0" prefWidth="155.0" text="Frios e Laticínios" textFill="#94A3B8" />
+                        <Label fx:id="lblPctFrios" layoutX="195.0" layoutY="108.0" text="0%" textFill="#F8FAFC">
+                            <font><Font name="Arial Bold" size="13.0" /></font>
                         </Label>
-                        <Circle fill="#7658E8" layoutX="8.0" layoutY="152.0" radius="6.0" />
-                        <Label layoutX="25.0" layoutY="143.0" prefWidth="155.0" text="Padaria" textFill="WHITE" />
-                        <Label fx:id="lblPctPadaria" layoutX="195.0" layoutY="143.0" text="0%" textFill="WHITE">
-                            <font>
-                                <Font name="Arial Bold" size="13.0" />
-                            </font>
+                        
+                        <Circle fill="#8B5CF6" layoutX="8.0" layoutY="152.0" radius="6.0" />
+                        <Label layoutX="25.0" layoutY="143.0" prefWidth="155.0" text="Padaria" textFill="#94A3B8" />
+                        <Label fx:id="lblPctPadaria" layoutX="195.0" layoutY="143.0" text="0%" textFill="#F8FAFC">
+                            <font><Font name="Arial Bold" size="13.0" /></font>
                         </Label>
-                        <Circle fill="#8C9AAA" layoutX="8.0" layoutY="187.0" radius="6.0" />
-                        <Label layoutX="25.0" layoutY="178.0" prefWidth="155.0" text="Outros" textFill="WHITE" />
-                        <Label fx:id="lblPctOutros" layoutX="195.0" layoutY="178.0" text="0%" textFill="WHITE">
-                            <font>
-                                <Font name="Arial Bold" size="13.0" />
-                            </font>
+                        
+                        <Circle fill="#64748B" layoutX="8.0" layoutY="187.0" radius="6.0" />
+                        <Label layoutX="25.0" layoutY="178.0" prefWidth="155.0" text="Outros" textFill="#94A3B8" />
+                        <Label fx:id="lblPctOutros" layoutX="195.0" layoutY="178.0" text="0%" textFill="#F8FAFC">
+                            <font><Font name="Arial Bold" size="13.0" /></font>
                         </Label>
                     </children>
                 </AnchorPane>
+            <ImageView fitHeight="39.0" fitWidth="32.0" layoutX="8.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/donut_large_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
+
+        <!-- TABELAS INFERIORES -->
         <AnchorPane layoutX="18.0" layoutY="650.0" prefHeight="270.0" prefWidth="825.0" styleClass="card-grafico">
             <children>
-                <Label layoutX="22.0" layoutY="19.0" text="Produtos com Estoque Baixo" textFill="WHITE">
+                <Label layoutX="56.0" layoutY="19.0" text="Produtos com Estoque Baixo" textFill="#F8FAFC">
                     <font>
                         <Font name="Arial Bold" size="16.0" />
                     </font>
                 </Label>
-                <Button layoutX="715.0" layoutY="10.0" prefHeight="30.0" prefWidth="85.0" styleClass="botao-secundario" text="Ver todos" textFill="WHITE" />
+                <Button layoutX="715.0" layoutY="10.0" prefHeight="30.0" prefWidth="85.0" styleClass="botao-secundario" text="Ver todos" textFill="#F8FAFC" />
                 <TableView fx:id="tabelaEstoqueBaixo" layoutX="15.0" layoutY="55.0" prefHeight="195.0" prefWidth="795.0" styleClass="tabela-dashboard">
                     <columns>
                         <TableColumn fx:id="colProdutoEstoque" prefWidth="385.0" text="Produto" />
@@ -220,16 +297,21 @@
                         <TableColumn fx:id="colEstoqueMinimo" prefWidth="205.0" text="Estoque Mínimo" />
                     </columns>
                 </TableView>
+            <ImageView fitHeight="28.0" fitWidth="32.0" layoutX="21.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/warning_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
         <AnchorPane layoutX="860.0" layoutY="650.0" prefHeight="270.0" prefWidth="650.0" styleClass="card-grafico">
             <children>
-                <Label layoutX="22.0" layoutY="15.0" text="Últimas Vendas" textFill="WHITE">
+                <Label layoutX="50.0" layoutY="15.0" text="Últimas Vendas" textFill="#F8FAFC">
                     <font>
                         <Font name="Arial Bold" size="16.0" />
                     </font>
                 </Label>
-                <Button layoutX="540.0" layoutY="10.0" prefHeight="30.0" prefWidth="85.0" styleClass="botao-secundario" text="Ver todas" textFill="WHITE" />
+                <Button layoutX="540.0" layoutY="10.0" prefHeight="30.0" prefWidth="85.0" styleClass="botao-secundario" text="Ver todas" textFill="#F8FAFC" />
                 <TableView fx:id="tabelaUltimasVendas" layoutX="15.0" layoutY="55.0" prefHeight="195.0" prefWidth="620.0" styleClass="tabela-dashboard">
                     <columns>
                         <TableColumn fx:id="colProdutoVenda" prefWidth="200.0" text="Produto" />
@@ -238,6 +320,11 @@
                         <TableColumn fx:id="colValorVenda" prefWidth="115.0" text="Valor" />
                     </columns>
                 </TableView>
+            <ImageView fitHeight="28.0" fitWidth="32.0" layoutX="18.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/shopping_cart_100dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
     </children>
